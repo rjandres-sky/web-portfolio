@@ -135,7 +135,7 @@ nav ul li a:hover::after{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 20px;
+  padding: 90px 20px;
   color: gray;
 }
 
@@ -218,8 +218,8 @@ nav ul li a:hover::after{
 }
 
 .skills{
-  width: 100%;
-  padding: 30px 20px;
+  width: 80%;
+  padding: 80px 20px;
 }
 
 .skill-content h1{
@@ -280,7 +280,7 @@ nav ul li a:hover::after{
 
 .experience{
   width: 100%;
-  padding: 30px 20px;
+  padding: 80px 20px;
   font-family: 'Fira Sans', sans-serif;
 }
 .experience h1{
@@ -349,9 +349,8 @@ nav ul li a:hover::after{
 .contact{
   display: flex;
   width: 100%;
-  padding: 0px 20px;
+  padding: 80px 20px 0 50px;
   align-items: flex-start;
-  padding-left: 50px;
 }
 
 .contact h1{
