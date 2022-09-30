@@ -1,5 +1,5 @@
 // JavaScript Document
-let holesValue = [7, 16, 7, 7, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 7, 0];
+let holesValue = [7, 7, 7, 7, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 7, 0];
 let currentPlayer = 1;
 
 
@@ -46,10 +46,11 @@ function setHoleValue()
 }
 
 function checkEmptyHole(currentIndex){
-	if (currentIndex != 7 || currentIndex != 15){
+	if (currentIndex != 7){
 		if(holesValue[currentIndex] != 0){
-			loopSeed(currentIndex);
-			console.log(holesValue[currentIndex]);
+            console.log(holesValue[currentIndex]);
+            loopSeed(currentIndex);
+			
 		}
 	}
 	/**/
@@ -66,41 +67,27 @@ function loopSeed(startHole) {
 	
 	console.log("start hole " +startHole + " " + seedCount);
 	
-	let index = 0;
-	
-	while(index <= seedCount){
-		
-		
-		console.log("array index " + index + " array index + start " + (index + startHole) +" nnnn hole " + currenIndex);
-		
-		
+	for(let index = 0; index <= seedCount; index++){
+
 		if(startHole == index + startHole){
 			holesValue[index + startHole] = 0;
 			currenIndex = (index + startHole);
-			console.log(currenIndex);
-		} 
-		
-		
-		/*else if (index > holesValue.length){
-			
-			console.log((index - 17) + startHole + " ------ " + index);
-			holesValue[(index - 17) + startHole] += 1;
-			currenIndex = (index - 17) + startHole;
-		} else {
-			
-			holesValue[index + startHole] += 1;
-			currenIndex = index + startHole;
-			console.log(currenIndex + " ------ " + index);	
-		} */
-		  
-		index++;
+		}  else{
+            if(currenIndex == 14){
+                currenIndex = 0;
+                holesValue[currenIndex] += 1;
+                //seedCount += 1;
+            } else {
+                currenIndex = (currenIndex + 1);
+                holesValue[currenIndex] += 1;    
+            }  
+        }  
+        console.log("array index " + index + " array index + start " + (index + startHole) +" nnnn hole " + currenIndex + " hole value " + holesValue.length);
 	}
-    
-	
-	
 	console.log("yyyyy" + currenIndex);
 	setHoleValue();
 	//loopSeed(currenIndex);
+    checkEmptyHole(currenIndex);
 }		
 		
 		
