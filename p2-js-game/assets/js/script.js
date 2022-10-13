@@ -4,6 +4,11 @@ let player;
 let msg;
 let moving = false;
 
+
+let audioDistribute = new Audio('assets/sounds/distribute.wav');
+let audioEnd = new Audio('assets/sounds/seed-end.wav');
+let audioWin = new Audio('assets/sounds/win2.wav');
+
 const player1 = Array.from(document.querySelectorAll('.holes.player-1'));
 const player2 = Array.from(document.querySelectorAll('.holes.player-2')).sort().reverse();
 const player1Home = document.querySelector(".home.player-1");
@@ -14,42 +19,44 @@ const mergeHoles = player1.concat(player1Home, player2, player2Home);
 const popupElement = document.querySelector(`.popup`);
 
 
-function currentPlayerHome(){
-    if(holesValue[7] > 49 || holesValue[15] > 49){
-        if(holesValue[7] < holesValue[15]){
+function currentPlayerHome() {
+    if (holesValue[7] > 49 || holesValue[15] > 49) {
+        if (holesValue[7] < holesValue[15]) {
+			player = 2;
             showPopupDisplay(`Player 2 win!!!`);
         } else {
+			player = 1;
             showPopupDisplay(`Player 1 win!!!`);
         }
         btnStart.innerHTML = `PLAY AGAIN`;
         btnStart.addEventListener(`click`, startGame);
         return;
     }
-        
 
-for(let index=0; index < 7; index++){
-	if(player == 1) {
-		player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-        player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-		player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-        player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-	} else {
-		player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-        player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-		player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-        player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
-	}
-}
+
+    for (let index = 0; index < 7; index++) {
+        if (player == 1) {
+            player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+        } else {
+            player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+            player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+        }
+    }
     btnStart.innerHTML = `Current : Player ${player}`;
 }
 
 function showPopupDisplay(msg) {
     popupElement.classList.add(`show-popup`);
-    if(player == 1){
-		popupElement.querySelector(`img`).src = "assets/images/huggy-win-turn.png";
-	} else if(player == 2){
-		popupElement.querySelector(`img`).src = "assets/images/kissy-win-turn.png";
-	}
+    if (player == 1) {
+        popupElement.querySelector(`img`).src = "assets/images/huggy-win-turn.png";
+    } else if (player == 2) {
+        popupElement.querySelector(`img`).src = "assets/images/kissy-win-turn.png";
+    }
     popupElement.querySelector(`p`).innerHTML = msg;
 }
 
@@ -79,7 +86,7 @@ function startGame() {
         showPopupDisplay(`Player 2 start the game`);
         msgDisplay(`Player 2 start the game`);
     }
-	currentPlayerHome();
+    currentPlayerHome();
     btnStart.removeEventListener(`click`, startGame);
 }
 
@@ -93,14 +100,14 @@ function msgDisplay(msg) {
 //add Event Listener to holes
 function action(index) {
     console.log(moving);
-    if(moving == true){
-       return;
+    if (moving == true) {
+        return;
     }
-    
+
     if (player == 2) {
         if ([0, 1, 2, 3, 4, 5, 6].includes(index) == true) {
             msgDisplay(`Select to your holes only.`);
-            return;  
+            return;
         }
 
         if (holesValue[index] == 0) {
@@ -110,10 +117,10 @@ function action(index) {
 
     } else if (player == 1) {
         if ([8, 9, 10, 11, 12, 13, 14].includes(index)) {
-            if(moving == false){
-                    msgDisplay(`Select to your holes only.`);
-                }
-            return;  
+            if (moving == false) {
+                msgDisplay(`Select to your holes only.`);
+            }
+            return;
         }
         if (holesValue[index] == 0) {
             msgDisplay(`Select hole that is not equal to 0.`);
@@ -154,10 +161,12 @@ async function checkEmptyHole(currentIndex, currentPlayer) {
 
     switch (currentIndex) {
         case 7:
+			audioEnd.play();
             msgDisplay(`Yahooo!!!\nStill my turn.`);
             showPopupDisplay(`Yahooo!!!\nStill my turn.`);
             break;
         case 15:
+			audioEnd.play();
             msgDisplay(`Yahooo!!!\nStill my turn.`);
             showPopupDisplay(`Yahooo!!!\nStill my turn.`);
             break;
@@ -166,9 +175,9 @@ async function checkEmptyHole(currentIndex, currentPlayer) {
                 loopSeed(currentIndex, currentPlayer);
             } else {
                 getOpponentHoleValue(currentIndex);
-				
-			await delay(5000);
-				
+
+                await delay(5000);
+
                 if (player == 1) {
                     player = 2;
                     msgDisplay(`Player 2 turn`);
@@ -231,15 +240,16 @@ async function loopSeed(startHole, currentPlayer) {
             }
 
             zoomPlus(currentIndex);
-
+				
             if (currentIndex != startHole) {
+				audioDistribute.play();
                 mergeHoles[currentIndex].innerHTML = "+1";
             }
 
-            await delay(1500);
+            await delay(1000);
 
             mergeHoles[currentIndex].innerHTML = holesValue[currentIndex];
-			zoomMinus(currentIndex);
+            zoomMinus(currentIndex);
         }
         //Check if hole is empty or home
         checkEmptyHole(currentIndex, currentPlayer);
@@ -272,13 +282,14 @@ async function loopSeed(startHole, currentPlayer) {
             zoomPlus(currentIndex);
 
             if (currentIndex != startHole) {
+				audioDistribute.play();
                 mergeHoles[currentIndex].innerHTML = "+1";
             }
 
-            await delay(1500);
+            await delay(1000);
 
             mergeHoles[currentIndex].innerHTML = holesValue[currentIndex];
-			zoomMinus(currentIndex);
+            zoomMinus(currentIndex);
         }
         //Check if hole is empty or home
         checkEmptyHole(currentIndex, currentPlayer);
@@ -293,11 +304,11 @@ function getOpponentHoleValue(currentIndex) {
 
         if (holesValue[opponentHole] != 0) {
             holesValue[7] = holesValue[7] + holesValue[opponentHole] + holesValue[currentIndex];
-			mergeHoles[7].innerHTML = holesValue[7];
+            mergeHoles[7].innerHTML = holesValue[7];
             holesValue[opponentHole] = 0;
-			mergeHoles[opponentHole].innerHTML = 0;	
+            mergeHoles[opponentHole].innerHTML = 0;
             holesValue[currentIndex] = 0;
-			mergeHoles[currentIndex].innerHTML = 0;
+            mergeHoles[currentIndex].innerHTML = 0;
             msgDisplay(`Hahaha!!! \nI plunder your seed.`);
             showPopupDisplay(`Hahaha!!! \nI plunder your seed.`);
         }
@@ -307,11 +318,11 @@ function getOpponentHoleValue(currentIndex) {
 
         if (holesValue[opponentHole] != 0) {
             holesValue[15] = holesValue[15] + holesValue[opponentHole] + holesValue[currentIndex];
-			mergeHoles[15].innerHTML = holesValue[15];
+            mergeHoles[15].innerHTML = holesValue[15];
             holesValue[opponentHole] = 0;
-			mergeHoles[opponentHole].innerHTML = 0;	
+            mergeHoles[opponentHole].innerHTML = 0;
             holesValue[currentIndex] = 0;
-			mergeHoles[currentIndex].innerHTML = 0;
+            mergeHoles[currentIndex].innerHTML = 0;
             msgDisplay(`Hahaha!!! \nI plunder your seed.`);
             showPopupDisplay(`Hahaha!!! \nI plunder your seed.`);
         }
