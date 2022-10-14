@@ -18,16 +18,39 @@ const mergeHoles = player1.concat(player1Home, player2, player2Home);
 
 const popupElement = document.querySelector(`.popup`);
 
+const instructionElement = document.querySelector(`.instruction`);
+
+const btnInstruction = document.querySelector(`.instruction-button`);
+const btnInstructionHide = document.querySelector(`.btn-hide-instruction`);
+
+
+function showInstruction(){
+    instructionElement.classList.add(`show-popup`);
+}
+
+function hideInstruction() {
+    instructionElement.classList.remove(`show-popup`);
+}
+
+
+btnInstruction.addEventListener(`click`, showInstruction);
+btnInstructionHide.addEventListener(`click`, hideInstruction);
 
 function currentPlayerHome() {
+    
     if (holesValue[7] > 49 || holesValue[15] > 49) {
+        
         if (holesValue[7] < holesValue[15]) {
 			player = 2;
             showPopupDisplay(`Player 2 win!!!`);
+            
         } else {
+            
 			player = 1;
             showPopupDisplay(`Player 1 win!!!`);
+            
         }
+        
         btnStart.innerHTML = `PLAY AGAIN`;
         btnStart.addEventListener(`click`, startGame);
         return;
@@ -35,28 +58,39 @@ function currentPlayerHome() {
 
 
     for (let index = 0; index < 7; index++) {
+        
         if (player == 1) {
+            
             player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+        
         } else {
+            
             player2[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player2Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(236,92,92,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player1[index].style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
             player1Home.style.background = 'linear-gradient(193deg, rgba(0,3,36,0.5550595238095238) 0%, rgba(255,185,135,0.8577159379376751) 100%, rgba(28,28,60,0.11808473389355745) 100%)';
+        
         }
     }
+    
     btnStart.innerHTML = `Current : Player ${player}`;
 }
 
 function showPopupDisplay(msg) {
     popupElement.classList.add(`show-popup`);
+    
     if (player == 1) {
         popupElement.querySelector(`img`).src = "assets/images/huggy-win-turn.png";
+    
     } else if (player == 2) {
+     
         popupElement.querySelector(`img`).src = "assets/images/kissy-win-turn.png";
+    
     }
+    
     popupElement.querySelector(`p`).innerHTML = msg;
 }
 
@@ -75,17 +109,23 @@ btnStart.addEventListener(`click`, startGame);
 
 function startGame() {
     var result = Math.random();
+    
     if (result < 0.5) {
+        
         player = 1;
         changePlayer();
         msgDisplay(`Player 1 start the game`);
         showPopupDisplay(`Player 1 start the game`)
+    
     } else {
+        
         player = 2;
         changePlayer();
         showPopupDisplay(`Player 2 start the game`);
         msgDisplay(`Player 2 start the game`);
+    
     }
+    
     currentPlayerHome();
     btnStart.removeEventListener(`click`, startGame);
 }
@@ -100,11 +140,13 @@ function msgDisplay(msg) {
 //add Event Listener to holes
 function action(index) {
     console.log(moving);
+    
     if (moving == true) {
         return;
     }
 
     if (player == 2) {
+        
         if ([0, 1, 2, 3, 4, 5, 6].includes(index) == true) {
             msgDisplay(`Select to your holes only.`);
             return;
@@ -116,12 +158,16 @@ function action(index) {
         }
 
     } else if (player == 1) {
+        
         if ([8, 9, 10, 11, 12, 13, 14].includes(index)) {
+            
             if (moving == false) {
                 msgDisplay(`Select to your holes only.`);
             }
+            
             return;
         }
+        
         if (holesValue[index] == 0) {
             msgDisplay(`Select hole that is not equal to 0.`);
             return;
@@ -171,9 +217,13 @@ async function checkEmptyHole(currentIndex, currentPlayer) {
             showPopupDisplay(`Yahooo!!!\nStill my turn.`);
             break;
         default:
+            
             if (holesValue[currentIndex] > 1) {
+                
                 loopSeed(currentIndex, currentPlayer);
+            
             } else {
+                
                 getOpponentHoleValue(currentIndex);
 
                 await delay(5000);
@@ -182,11 +232,15 @@ async function checkEmptyHole(currentIndex, currentPlayer) {
                     player = 2;
                     msgDisplay(`Player 2 turn`);
                     showPopupDisplay(`Player 2 turn`);
+                
                 } else {
+                    
                     player = 1;
                     msgDisplay(`Player 1 turn`);
                     showPopupDisplay(`Player 1 turn`);
+                
                 }
+                
                 currentPlayerHome();
             }
     }
@@ -197,25 +251,38 @@ function zoomPlus(currentIndex) {
         if (currentIndex != 15) {
             mergeHoles[currentIndex].style.fontSize = '30px';
             mergeHoles[currentIndex].style.fontStyle = 'bold';
+        
         } else {
+            
             mergeHoles[currentIndex].style.fontSize = '40px';
+        
         }
 
     } else {
+        
         mergeHoles[currentIndex].style.fontSize = '40px';
+    
     }
 }
 
 
 function zoomMinus(currentIndex) { //
     if (currentIndex != 7) {
+        
         if (currentIndex != 15) {
+            
             mergeHoles[currentIndex].style.fontSize = '20px';
+        
         } else {
+            
             mergeHoles[currentIndex].style.fontSize = '30px';
+        
         }
+        
     } else {
+        
         mergeHoles[currentIndex].style.fontSize = '30px';
+    
     }
 }
 
@@ -223,19 +290,27 @@ async function loopSeed(startHole, currentPlayer) {
     let currentIndex;
     let seedCount = holesValue[startHole];
     moving = true;
+    
     if (currentPlayer == 1) { //if current player equal to 1
+        
         for (let index = 0; index <= seedCount; index++) {
 
             if (startHole == index + startHole) {
                 holesValue[index + startHole] = 0;
                 currentIndex = (index + startHole);
+            
             } else {
+                
                 if (currentIndex == 14) {
+                    
                     currentIndex = 0;
                     holesValue[currentIndex] += 1;
+                
                 } else {
+                    
                     currentIndex += 1;
                     holesValue[currentIndex] += 1;
+                
                 }
             }
 
@@ -255,25 +330,31 @@ async function loopSeed(startHole, currentPlayer) {
         checkEmptyHole(currentIndex, currentPlayer);
 
     } else if (currentPlayer == 2) { //if current player equal to 2
+        
         for (let index = 0; index <= seedCount; index++) {
 
             if (startHole == index + startHole) {
                 currentIndex = (index + startHole);
                 holesValue[currentIndex] = 0;
+            
             } else {
 
                 currentIndex += 1;
 
                 if (currentIndex == 7) {
+                    
                     currentIndex = 8;
                     holesValue[currentIndex] += 1;
+                
                 } else {
 
                     if (currentIndex == 16) {
+                        
                         currentIndex = 0;
                         holesValue[currentIndex] += 1;
 
                     } else {
+                        
                         holesValue[currentIndex] += 1;
                     }
                 }
