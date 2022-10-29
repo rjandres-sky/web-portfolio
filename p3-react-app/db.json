@@ -1,0 +1,35 @@
+{
+  "documents": [],
+  "users": [
+    {
+      "id": "1",
+      "name": "Rj Andres",
+      "division": "divisionid",
+      "roletype": "Administrator",
+      "cansign": "false",
+      "signingscope": ""
+    },
+    {
+      "id": "2",
+      "name": "Rj Andres",
+      "division": "divisionid",
+      "roletype": "Administrator",
+      "cansign": "false",
+      "signingscope": ""
+    },
+    {
+      "id": "3",
+      "name": "Rj Andres",
+      "division": "divisionid",
+      "roletype": "Administrator",
+      "cansign": "false",
+      "signingscope": ""
+    }
+  ],
+  "division": [
+    {
+      "division": "ORD",
+      "section": "MIS"
+    }
+  ]
+}
