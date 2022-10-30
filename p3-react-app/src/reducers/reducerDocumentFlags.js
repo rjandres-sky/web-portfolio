@@ -1,4 +1,4 @@
-const reducerDocument = (state = {documentAction:'', onAddEditDocument:false}, action) => {
+const reducerDocumentFlags = (state = {documentAction:'', onAddEditDocument:false}, action) => {
     console.log(action.payload)
     if(action.type === 'Change'){
         return action.payload;
@@ -7,4 +7,4 @@ const reducerDocument = (state = {documentAction:'', onAddEditDocument:false}, a
     }
 }
 
-export default reducerDocument;
+export default reducerDocumentFlags;

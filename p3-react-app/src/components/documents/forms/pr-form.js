@@ -10,7 +10,7 @@ let documentNo = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-
 let documentPrefix = today.getFullYear() + '-' + parseInt(today.getMonth() + 1);
 
 const PRForm = () => {
-    const flags = useSelector(state => state)
+    const flags = useSelector(state => state.documentFlags)
     const dispatch = new useDispatch();
     const [items, setNewItem] = useState([])
     const [purpose, setPurpose] = useState('');
@@ -21,21 +21,6 @@ const PRForm = () => {
 
     const [savingDocument, setSavingDocument] = useState(false);
     const [documentID, setDocumentID] = useState([]);
-
-
-
-    useEffect(() => {
-
-        fetch("http://localhost:4000/documents")
-            .then(res => res.json())
-            .then(result => {
-                console.log(result)
-                setDocumentID(result)
-            }
-            )
-            .catch(console.log)
-    }, [])
-    console.log('ffffff' + documentID.id)
 
     // useEffect(() => {
     //     fetch("http://localhost:4000/users",
@@ -63,7 +48,7 @@ const PRForm = () => {
     //             .catch(console.log)
     // }, users)
 
-    console.log(users);
+    //console.log(users);
 
     const AddItemHandler = () => {
         if (flagEditingItem && items.length === 0) { //flag is from child component
@@ -83,7 +68,7 @@ const PRForm = () => {
     }
 
     const generateID = () => {
-        let sampleID = '2022-10-0001'; 
+        let sampleID = '2022-10-0001';
         let newID = (parseInt(sampleID.substring(sampleID.length - 4, sampleID.length)) + 1).toString();
         return;
     }
@@ -146,13 +131,14 @@ const PRForm = () => {
         <>
 
             <form onSubmit={e => e.preventDefault()}>
+            <h3>{flags.documentAction} Purchase Request</h3>
                 <div className="form-details">
 
-                    <div>
-                        <h3>{flags.documentAction} Purchase Request</h3>
+                    <div className="detail-container">
                         <input type='hidden' name='docno' value={documentNo} />
                         <input type='hidden' name='docdate' value={date} onChange={e => e.target.value} />
-
+                        <p><span>PR No. : </span> PR-1222222</p>
+                        <p><span>PR Date : </span> 10-30-2022</p>
                         <label htmlFor='purpose'>Purpose : </label>
                         <textarea name='purpose' id='purpose' value={purpose} onChange={e => setPurpose(e.target.value)} />
                     </div>
@@ -161,10 +147,11 @@ const PRForm = () => {
                     <div className='button-container'>
                         <button className="button" onClick={() => setSavingDocument(true)}>Save</button>
                         <button className="button" onClick={saveCloseHandler}>Save and Close</button>
-                        <br />
-                        <button className="button" onClick={AddItemHandler}>Add Item</button>
-
+                        <button className="button" onClick={saveCloseHandler}>Cancel</button>
                     </div>
+                </div>
+                <div>
+                    <button className="button" id='additem' onClick={AddItemHandler}>Add Item</button>
                 </div>
 
                 {/* Entry for items */}

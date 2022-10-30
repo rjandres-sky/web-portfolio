@@ -135,3 +135,29 @@ img {
     justify-content: center;
     align-items: center;
 }
+
+.form-details .detail-container{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+.form-details .detail-container textarea{
+    width: 95%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.form-details .detail-container p{
+    margin: 5px;
+}
+
+.form-details .detail-container p span, 
+.form-details .detail-container label{
+    font-weight: 500;
+}
+
+#additem{
+    width: 200px;
+}

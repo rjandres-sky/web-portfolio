@@ -164,7 +164,7 @@ const ItemsForm = ({ items, saveItem, flagEditing }) => {
             <div className={itemPop}>
                 <h4> Item Decription </h4>
                 <div>
-                    <label htmlfor="addItem"> Item : </label>
+                    <label htmlFor="addItem"> Item : </label>
                     <input
                         className="add-item"
                         name="addItem"
@@ -175,7 +175,7 @@ const ItemsForm = ({ items, saveItem, flagEditing }) => {
                 </div>
 
                 <div>
-                    <label htmlfor="addDescription"> Decription : </label>
+                    <label htmlFor="addDescription"> Decription : </label>
                     <input
                         className="add-description"
                         name="addDecription"

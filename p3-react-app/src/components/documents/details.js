@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './details.css';
 
@@ -8,8 +8,29 @@ import DocumentForm from './forms/document-form';
 const DocumentDetails = () => {
 
     const dispatch = new useDispatch();
+    //load Documents
+    const documents = useSelector(state => state.documents);
+    useEffect(() => {
+        fetch("http://localhost:4000/users")
+        .then(res => res.json())
+        .then(result => {
+            console.debug(result)
+            //documents = result
+        })
+        .catch(console.log)     
+    },[])
 
-    const flags = useSelector(state => state)
+    dispatch({ type: 'LOAD'})
+
+    
+    const flags = useSelector(state => state.documentFlags);
+
+    const refreshDocuments = () => {
+        //dispatch({ type: 'LOAD', payload: [documents] })
+    }
+
+    console.dir(documents)
+
 
     const addDocumentHandler = (e) => {
 
@@ -23,78 +44,24 @@ const DocumentDetails = () => {
 
     return (
 
+
+
         <div className="container">
             {/* List of Document within Division/Section */}
             <div className="left-container">
                 <div className='search-container'>Search Document <input type='search' /></div>
                 <h4> Pending Documents </h4>
-                <div className='doucment-list'>
-                    <p>PR-00004</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00005</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00006</p>
-                </div>
+                {documents.map(document => {
+                    <div className='doucment-list'>
+                        <p>{document.prno}</p>
+                    </div>
+                })}
+
                 <h4> Done Documents </h4>
                 <div className='doucment-list'>
                     <p>PR-00001</p>
                 </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00001</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00001</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00001</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00001</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00002</p>
-                </div>
-                <div className='doucment-list'>
-                    <p>PR-00003</p>
-                </div>
+
             </div>
 
             {/* Details of document */}

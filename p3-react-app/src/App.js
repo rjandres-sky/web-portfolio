@@ -1,6 +1,6 @@
 import './App.css';
 import { Provider } from 'react-redux';
-import storeDocument from './reducers/storeDocument';
+import stores from './reducers/stores';
 
 //components
 import Header from './components/header/header';
@@ -12,7 +12,7 @@ function App() {
     
     <div className="App">
        <Header/> 
-       <Provider store={storeDocument}>
+       <Provider store={stores}>
        <DocumentDetails/>
        </Provider>
        <Footer />
