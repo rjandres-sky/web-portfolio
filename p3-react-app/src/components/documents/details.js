@@ -1,29 +1,28 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './details.css';
 
 //components
 import DocumentForm from './forms/document-form';
 
 const DocumentDetails = () => {
-    const [onAddEditDocument, setOnAddEditDocument] = useState(false)
-    const [documentAction, setDocumentAction] = useState('')
+
+    const dispatch = new useDispatch();
+
+    const flags = useSelector(state => state)
 
     const addDocumentHandler = (e) => {
-        if (onAddEditDocument === false) {
-            console.log(e.target.name)
-            if(e.target.name === 'adddocument'){
-                setDocumentAction('New')
-            }else if(e.target.name === 'editdocument') {
-                setDocumentAction('Edit')
-            }
-            setOnAddEditDocument(true)
+
+        if (flags.onAddEditDocument === false) {
+            dispatch({ type: 'Change', payload: { documentAction: e.target.name, onAddEditDocument: true } })
         } else {
-            setDocumentAction('')
-            setOnAddEditDocument(false)
+            console.log(flags.onAddEditDocument)
+            dispatch({ type: 'Change', payload: { documentAction: '', onAddEditDocument: false } })
         }
     }
 
     return (
+
         <div className="container">
             {/* List of Document within Division/Section */}
             <div className="left-container">
@@ -103,7 +102,7 @@ const DocumentDetails = () => {
                 <div className='body-container-top'>
                     <div className='button-container'>
                         <button
-                            name='adddocument'
+                            name='New'
                             className="button"
                             onClick={addDocumentHandler}
                         >Add Document</button>
@@ -120,7 +119,7 @@ const DocumentDetails = () => {
 
                         <div className='button-container'>
                             <button
-                                name='editdocument'
+                                name='Edit'
                                 className="button"
                                 onClick={addDocumentHandler}
                             >Edit</button>
@@ -130,8 +129,8 @@ const DocumentDetails = () => {
                 </div>
 
                 { /* Form for adding and editing document - Modal Form */
-                    onAddEditDocument &&
-                    <DocumentForm formShow={addDocumentHandler} action={documentAction}/>
+                    flags.onAddEditDocument &&
+                    <DocumentForm />
                 }
 
                 <div className='body-container-bottom'>
@@ -152,5 +151,4 @@ const DocumentDetails = () => {
         </div>
     )
 }
-
 export default DocumentDetails;

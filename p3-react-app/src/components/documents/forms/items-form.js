@@ -135,7 +135,7 @@ const ItemsForm = ({ items, saveItem, flagEditing }) => {
         <div className="form-items">
             <input className='item-stock' type='text' placeholder='Stock' readOnly />
 
-            <select className='item-unit' name="itemunit" id="select" value={unit || 'Select'} onChange={onChangeUnit}>
+            <select className='item-unit' name="itemunit" value={unit || 'Select'} onChange={onChangeUnit}>
                 <option value="pc">pc/s</option>
                 <option value="box">box</option>
                 <option value="unit">unit</option>
@@ -164,20 +164,22 @@ const ItemsForm = ({ items, saveItem, flagEditing }) => {
             <div className={itemPop}>
                 <h4> Item Decription </h4>
                 <div>
-                    <label for="addItem"> Item : </label>
+                    <label htmlfor="addItem"> Item : </label>
                     <input
                         className="add-item"
                         name="addItem"
+                        id="addItem"
                         value={desc.name}
                         onChange={onChangeModalItem}
                     />
                 </div>
 
                 <div>
-                    <label for="addDescription"> Decription : </label>
+                    <label htmlfor="addDescription"> Decription : </label>
                     <input
                         className="add-description"
                         name="addDecription"
+                        id="addDecription"
                         value={desc.itemdesc}
                         onChange={onChangeModalDesc}
                     />

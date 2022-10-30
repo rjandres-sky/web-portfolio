@@ -1,4 +1,6 @@
 import './App.css';
+import { Provider } from 'react-redux';
+import storeDocument from './reducers/storeDocument';
 
 //components
 import Header from './components/header/header';
@@ -10,7 +12,9 @@ function App() {
     
     <div className="App">
        <Header/> 
+       <Provider store={storeDocument}>
        <DocumentDetails/>
+       </Provider>
        <Footer />
     </div>
   );
