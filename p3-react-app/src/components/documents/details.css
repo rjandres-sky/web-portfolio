@@ -73,3 +73,17 @@
     box-shadow: 10px 10px 5px 0px rgba(196, 184, 184, 0.75);
     border-radius: 12PX;
 }
+
+.doucment-list {
+    display: flex;
+    padding: 5px;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+}
+.doucment-list p {
+    margin: 5px 10px;
+    font-weight: 500;
+    cursor: pointer;
+}

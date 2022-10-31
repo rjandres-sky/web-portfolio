@@ -7,7 +7,7 @@
       "date": "2022-10-22",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
-      "purpose": "",
+      "purpose": "to used for upgrading",
       "requestedBy": {
         "name": "",
         "position": ""
@@ -33,11 +33,11 @@
     {
       "refid": "PR-121212",
       "documentType": "PR",
-      "prno": "2022-01-0001",
+      "prno": "2022-01-0002",
       "date": "2022-10-22",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
-      "purpose": "",
+      "purpose": "to be used by admin staff",
       "requestedBy": {
         "name": "",
         "position": ""

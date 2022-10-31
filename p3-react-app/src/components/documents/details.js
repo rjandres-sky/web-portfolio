@@ -4,32 +4,42 @@ import './details.css';
 
 //components
 import DocumentForm from './forms/document-form';
+import DocumentList from './document-list';
+import CurrentDocument from './current-document';
 
 const DocumentDetails = () => {
 
     const dispatch = new useDispatch();
     //load Documents
-    const documents = useSelector(state => state.documents);
+    const [documents, setDocuments] = useState(null);
+    const [currentDocument, setCurrentDocument] = useState(null)
+
+    const currentDocumentHandler = (docNo) => {
+
+        setCurrentDocument(documents.filter(doc => doc.prno === docNo));
+        console.log(currentDocument)
+    }
+
     useEffect(() => {
-        fetch("http://localhost:4000/users")
-        .then(res => res.json())
-        .then(result => {
-            console.debug(result)
-            //documents = result
-        })
-        .catch(console.log)     
-    },[])
+        fetch("http://localhost:4000/documents")
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                setDocuments(result)
+            })
+            .catch(console.log)
+    }, [])
 
-    dispatch({ type: 'LOAD'})
+    dispatch({ type: 'LOAD' })
 
-    
+
     const flags = useSelector(state => state.documentFlags);
 
     const refreshDocuments = () => {
         //dispatch({ type: 'LOAD', payload: [documents] })
     }
 
-    console.dir(documents)
+    console.log(documents)
 
 
     const addDocumentHandler = (e) => {
@@ -51,11 +61,9 @@ const DocumentDetails = () => {
             <div className="left-container">
                 <div className='search-container'>Search Document <input type='search' /></div>
                 <h4> Pending Documents </h4>
-                {documents.map(document => {
-                    <div className='doucment-list'>
-                        <p>{document.prno}</p>
-                    </div>
-                })}
+                {documents && documents.map((doc) =>
+                    <DocumentList key={doc.id} document={doc} current={currentDocumentHandler} />
+                )}
 
                 <h4> Done Documents </h4>
                 <div className='doucment-list'>
@@ -76,13 +84,9 @@ const DocumentDetails = () => {
                     </div>
                     <h4> Current Documents Details</h4>
                     <div className='details-container'>
-                        <div className='details'>
-                            <p> <span>Reference No. :</span> PR-12345678 </p>
-                            <p> <span>Document Type :</span> PR </p>
-                            <p> <span>Document No. :</span> 2022-01-0001 </p>
-                            <p> <span>Document Date :</span> 2022-01-26 </p>
-                            <p> <span>Purpose :</span> to be used for upgrading servers </p>
-                        </div>
+                        {
+                            currentDocument && currentDocument.map(doc => <CurrentDocument key={doc.id} current={doc} />)
+                        }
 
                         <div className='button-container'>
                             <button
