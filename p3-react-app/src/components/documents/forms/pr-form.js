@@ -5,22 +5,19 @@ import './document-form.css';
 import ItemsForm from './items-form';
 
 let today = new Date()
-let date = today.getDate() + '/' + parseInt(today.getMonth() + 1) + '/' + today.getFullYear()
+let currentdate = today.getDate() + '/' + parseInt(today.getMonth() + 1) + '/' + today.getFullYear()
 let documentNo = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-0001'
-let documentPrefix = today.getFullYear() + '-' + parseInt(today.getMonth() + 1);
+let docnoPrefix = today.getFullYear() + '-' + parseInt(today.getMonth() + 1);
+let refidPrefix = '-' + today.getFullYear() + parseInt(today.getMonth() + 1);
 
-const PRForm = () => {
-    const flags = useSelector(state => state.documentFlags)
+const PRForm = ({ current, doctype, setDocument }) => {
     const dispatch = new useDispatch();
-    const [items, setNewItem] = useState([])
-    const [purpose, setPurpose] = useState('');
+    const flags = useSelector(state => state.documentFlags)
+
+    const [items, setNewItem] = useState(flags.documentAction == 'Edit' ? [...current.items] : [])
+    const [purpose, setPurpose] = useState(flags.documentAction == 'Edit' ? current.purpose : '');
     const [flagEditingItem, setFlagEditingItem] = useState(false);
     const [totalCost, setTotalCost] = useState(items.map(item => item.totalcost).reduce((total, value) => parseFloat(total) + parseFloat(value), 0).toFixed(2))
-
-    const [users, setUsers] = useState([])
-
-    const [savingDocument, setSavingDocument] = useState(false);
-    const [documentID, setDocumentID] = useState([]);
 
     // useEffect(() => {
     //     fetch("http://localhost:4000/users",
@@ -63,51 +60,68 @@ const PRForm = () => {
             }
         }
         setFlagEditingItem(true)
-        setNewItem([...items, { id: items.length, stock: '', unit: 'pc', description: { name: '', itemdesc: '' }, qty: 1, unitcost: '0.00', totalcost: '0.00' }])
-        //console.log(items.map(item => item.totalcost).reduce((total, value) => parseFloat(total) + parseFloat(value), 0).toFixed(2));
+        setNewItem([...items, { id: items.length, stock: '', unit: 'pc', description: { name: '', itemdesc: '' }, qty: 1, unitcost: '0.00', totalcost: '0.00' }]);
+
     }
 
-    const generateID = () => {
-        let sampleID = '2022-10-0001';
-        let newID = (parseInt(sampleID.substring(sampleID.length - 4, sampleID.length)) + 1).toString();
-        return;
-    }
+    const saveDocument = () => {
 
-    useEffect(() => {
-        if (savingDocument) {
-            fetch("http://localhost:4000/documents",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(
-                        {
-                            refid: 'PR-121212',
-                            documentType: 'PR',
-                            prno: '2022-01-0001',
-                            date: '2022-10-22',
-                            officeSection: 'Admin',
-                            responsibleCenterCode: '',
-                            purpose: '',
-                            requestedBy: { name: '', position: '' },
-                            recommending: { name: '', position: '' },
-                            approvedBy: { name: '', position: '' },
-                            Items: [...items],
-                            total: '',
-                            createdBy: { userid: '', name: '', position: '', section: '' }
-                        }
-                    )
-                }
-
-            )
+        if (flags.documentAction === 'New') {
+            let newID = '';
+            fetch("http://localhost:4000/documents?prno like=" + docnoPrefix)
                 .then(res => res.json())
                 .then(result => {
-                    console.log(result)
-                    setSavingDocument(false)
-                }
-                )
+                    let ID = result.reverse()[0].prno;
+                    newID =  (parseInt(ID.substring(ID.length - 4, ID.length)) + 1).toString();
+                    newID = '0'.repeat(4 - newID.length) + newID
+                    
+                    const docValue = {
+                        refid: doctype + refidPrefix + newID,
+                        documentType: doctype,
+                        prno: docnoPrefix + '-' + newID,
+                        date: currentdate,
+                        officeSection: 'Admin',
+                        responsibleCenterCode: '',
+                        purpose: purpose,
+                        requestedBy: { name: '', position: '' },
+                        recommending: { name: '', position: '' },
+                        approvedBy: { name: '', position: '' },
+                        items: [...items],
+                        total: totalCost,
+                        Status: 'Pending',
+                        createdBy: { userid: '', name: '', position: '', section: '' }
+                    }
+                    setDocument(docValue, 'New')
+                
+                
+                })
                 .catch(console.log)
+
+                //console.log('Get ID' + newID)
+
+        } else if (flags.documentAction === 'Edit') {
+
+            const docValue = {
+                refid: current.refid,
+                documentType: current.documentType,
+                prno: current.prno,
+                date: current.date,
+                officeSection: 'Admin',
+                responsibleCenterCode: '',
+                purpose: purpose,
+                requestedBy: { name: '', position: '' },
+                recommending: { name: '', position: '' },
+                approvedBy: { name: '', position: '' },
+                items: [...items],
+                total: totalCost,
+                Status: 'Pending',
+                createdBy: { userid: '', name: '', position: '', section: '' }
+            }
+            setDocument(docValue, 'Edit')
         }
-    })
+
+
+    }
 
     const saveItemHandler = (itemData) => {
 
@@ -131,21 +145,20 @@ const PRForm = () => {
         <>
 
             <form onSubmit={e => e.preventDefault()}>
-            <h3>{flags.documentAction} Purchase Request</h3>
+                <h3>{flags.documentAction} Purchase Request</h3>
                 <div className="form-details">
 
                     <div className="detail-container">
                         <input type='hidden' name='docno' value={documentNo} />
-                        <input type='hidden' name='docdate' value={date} onChange={e => e.target.value} />
-                        <p><span>PR No. : </span> PR-1222222</p>
-                        <p><span>PR Date : </span> 10-30-2022</p>
+                        <input type='hidden' name='docdate' value={currentdate} onChange={e => e.target.value} />
+                        <p><span>PR No. : </span> {flags.documentAction == 'Edit' ? current.prno : ''}</p>
+                        <p><span>PR Date : </span> {flags.documentAction == 'Edit' ? current.date : currentdate}</p>
                         <label htmlFor='purpose'>Purpose : </label>
                         <textarea name='purpose' id='purpose' value={purpose} onChange={e => setPurpose(e.target.value)} />
                     </div>
 
-
                     <div className='button-container'>
-                        <button className="button" onClick={() => setSavingDocument(true)}>Save</button>
+                        <button className="button" onClick={saveDocument}>Save</button>
                         <button className="button" onClick={saveCloseHandler}>Save and Close</button>
                         <button className="button" onClick={saveCloseHandler}>Cancel</button>
                     </div>

@@ -1,7 +1,7 @@
 {
   "documents": [
     {
-      "refid": "PR-121212",
+      "refid": "PR-121213",
       "documentType": "PR",
       "prno": "2022-01-0001",
       "date": "2022-10-22",
@@ -20,8 +20,9 @@
         "name": "",
         "position": ""
       },
-      "Items": [],
+      "items": [],
       "total": "",
+      "Status": "Pending",
       "createdBy": {
         "userid": "",
         "name": "",
@@ -50,8 +51,9 @@
         "name": "",
         "position": ""
       },
-      "Items": [],
+      "items": [],
       "total": "",
+      "Status": "Pending",
       "createdBy": {
         "userid": "",
         "name": "",
@@ -59,6 +61,148 @@
         "section": ""
       },
       "id": 2
+    },
+    {
+      "refid": "PR-121214",
+      "documentType": "PR",
+      "prno": "2022-01-0004",
+      "date": "2022-10-22",
+      "officeSection": "Admin",
+      "responsibleCenterCode": "",
+      "purpose": "fdsfdsf sdfsdf gfh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [
+        {
+          "id": 0,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "ghgh",
+            "itemdesc": "hghgh"
+          },
+          "qty": 1,
+          "unitcost": "100.00",
+          "totalcost": "100.00"
+        },
+        {
+          "id": 1,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "aasas dfdf",
+            "itemdesc": "dfdf dff"
+          },
+          "qty": 1,
+          "unitcost": "30.00",
+          "totalcost": "30.00"
+        },
+        {
+          "id": 2,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "h",
+            "itemdesc": "h"
+          },
+          "qty": "5",
+          "unitcost": "45.00",
+          "totalcost": "225.00"
+        },
+        {
+          "id": 3,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "ggg",
+            "itemdesc": "dfdfd"
+          },
+          "qty": 1,
+          "unitcost": "67.00",
+          "totalcost": "67.00"
+        }
+      ],
+      "total": "422.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 3
+    },
+    {
+      "refid": "PR-2022110005",
+      "documentType": "PR",
+      "prno": "2022-11-0005",
+      "date": "1/11/2022",
+      "officeSection": "Admin",
+      "responsibleCenterCode": "",
+      "purpose": "",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 4
+    },
+    {
+      "refid": "PR-2022110006",
+      "documentType": "PR",
+      "prno": "2022-11-0006",
+      "date": "1/11/2022",
+      "officeSection": "Admin",
+      "responsibleCenterCode": "",
+      "purpose": "",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 5
     }
   ],
   "users": [
@@ -91,6 +235,34 @@
     {
       "division": "ORD",
       "section": "MIS"
+    }
+  ],
+  "documentstatus": [
+    {
+      "id": 1,
+      "docno": "PR-121212",
+      "action": "Received",
+      "remarks": "",
+      "dateandtime": "",
+      "createdBy": {
+        "userid": "",
+        "name": "Rj Andres",
+        "position": "",
+        "section": ""
+      }
+    },
+    {
+      "id": 2,
+      "docno": "PR-121212",
+      "action": "Fowarded",
+      "remarks": "For approval",
+      "dateandtime": "",
+      "createdBy": {
+        "userid": "",
+        "name": "Rj Andres",
+        "position": "",
+        "section": ""
+      }
     }
   ]
 }

@@ -5,11 +5,12 @@
     min-height: 100vh;
     background: #fdf9f9;
     background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
+    top: relative;
 }
 
-.container div {
+/* .container div {
     border: 1px solid pink;
-}
+} */
 
 .left-container {
     overflow-y: scroll;

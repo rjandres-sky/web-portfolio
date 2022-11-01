@@ -6,21 +6,44 @@ import './details.css';
 import DocumentForm from './forms/document-form';
 import DocumentList from './document-list';
 import CurrentDocument from './current-document';
+import CurrentDocumentStatus from './current-document-status';
 
 const DocumentDetails = () => {
 
     const dispatch = new useDispatch();
+    dispatch({ type: 'LOAD' })
+
+    const docs = useSelector(state => state.documents);
+    const flags = useSelector(state => state.documentFlags);
+
+    console.log(docs)
     //load Documents
     const [documents, setDocuments] = useState(null);
     const [currentDocument, setCurrentDocument] = useState(null)
+    const [currentDocumentStatus, setCurrentDocumentStatus] = useState(null)
 
+    //select document
     const currentDocumentHandler = (docNo) => {
 
-        setCurrentDocument(documents.filter(doc => doc.prno === docNo));
-        console.log(currentDocument)
+        setCurrentDocument(documents.filter(doc =>
+            doc.refid === docNo));
+
+        //display document status
+        fetch("http://localhost:4000/documentstatus?docno=" + docNo)
+            .then(res => res.json())
+            .then(result => {
+                setCurrentDocumentStatus(result)
+            })
+            .catch(console.log)
+
     }
 
+    // load documents
     useEffect(() => {
+        getDoucments();
+    }, [])
+
+    const getDoucments = () => {
         fetch("http://localhost:4000/documents")
             .then(res => res.json())
             .then(result => {
@@ -28,18 +51,60 @@ const DocumentDetails = () => {
                 setDocuments(result)
             })
             .catch(console.log)
-    }, [])
-
-    dispatch({ type: 'LOAD' })
-
-
-    const flags = useSelector(state => state.documentFlags);
-
-    const refreshDocuments = () => {
-        //dispatch({ type: 'LOAD', payload: [documents] })
     }
 
-    console.log(documents)
+    // useEffect(() => {
+    //     if(currentDocument !== null) {
+    //     fetch("http://localhost:4000/documentstatus?docno=" + currentDocument.refid)
+    //         .then(res => res.json())
+    //         .then(result => {
+    //             console.log('qqqqqqqq' + result)
+    //             setCurrentDocumentStatus(result)
+    //         })
+    //         .catch(console.log)
+    //     }
+    // }, [])
+
+
+
+
+
+
+    const saveDocuments = (docValue, action) => {
+        console.log('save ' + flags.documentFlags)
+        if (action === 'New') {
+            fetch("http://localhost:4000/documents",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(docValue)
+                })
+                .then(res => res.json())
+                .then(result => {
+                    console.log(result)
+                    getDoucments();
+                })
+                .catch(console.log)
+
+        } else if (action === "Edit") {
+
+            fetch("http://localhost:4000/documents/" + currentDocument.id,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(docValue)
+                })
+                .then(res => res.json())
+                .then(result => {
+                    console.debug(result)
+                    getDoucments();
+                }
+                )
+                .catch(console.log)
+        }
+    }
+
+    console.debug('yyyyy' + currentDocument)
 
 
     const addDocumentHandler = (e) => {
@@ -85,23 +150,18 @@ const DocumentDetails = () => {
                     <h4> Current Documents Details</h4>
                     <div className='details-container'>
                         {
-                            currentDocument && currentDocument.map(doc => <CurrentDocument key={doc.id} current={doc} />)
+                            currentDocument ? currentDocument.map(doc => <CurrentDocument key={doc.id} current={doc} addDocumentHandler={addDocumentHandler} />) :
+                                <div><h4> No document selected</h4> </div>
                         }
 
-                        <div className='button-container'>
-                            <button
-                                name='Edit'
-                                className="button"
-                                onClick={addDocumentHandler}
-                            >Edit</button>
-                            <button className="button">Forward</button>
-                        </div>
+
                     </div>
                 </div>
 
                 { /* Form for adding and editing document - Modal Form */
                     flags.onAddEditDocument &&
-                    <DocumentForm />
+                    (currentDocument ? currentDocument.map(doc => <DocumentForm key={doc.id} current={doc} setDocument={saveDocuments} />)
+                        : <DocumentForm setDocument={saveDocuments} />)
                 }
 
                 <div className='body-container-bottom'>
@@ -112,6 +172,11 @@ const DocumentDetails = () => {
             <div className="right-container">
                 {Date()}
                 <h4> Document Status </h4>
+                {//Document Status
+                    currentDocumentStatus ?
+                        currentDocumentStatus.map(status => <CurrentDocumentStatus key={status.id} currentStatus={status} />)
+                        : <div> </div>
+                }
             </div>
 
             <div className='document-action'>

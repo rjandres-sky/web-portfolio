@@ -1,7 +1,7 @@
 const DocumentList = ({document, current}) => {
 
     const currentDocument = () => {
-        current(document.prno)
+        current(document.refid)
     }
 return (
     <div className='doucment-list'>
