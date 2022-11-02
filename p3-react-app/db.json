@@ -3,11 +3,11 @@
     {
       "refid": "PR-121213",
       "documentType": "PR",
-      "prno": "2022-01-0001",
+      "docno": "2022-01-0001",
       "date": "2022-10-22",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
-      "purpose": "to used for upgrading",
+      "purpose": "to be used for upgrading",
       "requestedBy": {
         "name": "",
         "position": ""
@@ -21,7 +21,7 @@
         "position": ""
       },
       "items": [],
-      "total": "",
+      "total": "0.00",
       "Status": "Pending",
       "createdBy": {
         "userid": "",
@@ -34,7 +34,7 @@
     {
       "refid": "PR-121212",
       "documentType": "PR",
-      "prno": "2022-01-0002",
+      "docno": "2022-01-0002",
       "date": "2022-10-22",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
@@ -65,7 +65,7 @@
     {
       "refid": "PR-121214",
       "documentType": "PR",
-      "prno": "2022-01-0004",
+      "docno": "2022-01-0004",
       "date": "2022-10-22",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
@@ -143,9 +143,9 @@
       "id": 3
     },
     {
-      "refid": "PR-2022110005",
+      "refid": "PR-2022110001",
       "documentType": "PR",
-      "prno": "2022-11-0005",
+      "docno": "2022-11-0001",
       "date": "1/11/2022",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
@@ -174,9 +174,9 @@
       "id": 4
     },
     {
-      "refid": "PR-2022110006",
+      "refid": "PR-2022110002",
       "documentType": "PR",
-      "prno": "2022-11-0006",
+      "docno": "2022-11-0002",
       "date": "1/11/2022",
       "officeSection": "Admin",
       "responsibleCenterCode": "",
@@ -203,22 +203,51 @@
         "section": ""
       },
       "id": 5
+    },
+    {
+      "refid": "DV-2022110001",
+      "documentType": "DV",
+      "docno": "2022-11-0001",
+      "date": "1/11/2022",
+      "officeSection": "Admin",
+      "particulars": "xcxzccxcvxv",
+      "amount": "0.00",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 6
     }
   ],
   "users": [
     {
       "id": "1",
-      "name": "Rj Andres",
+      "name": "Angel Encarnacion",
+      "username" : "encarnacion",
+      "password" : "abc123",
       "division": "divisionid",
-      "roletype": "Administrator",
-      "cansign": "false",
-      "signingscope": ""
+      "roletype": "Director",
+      "cansign": "true",
+      "signingscope": "All"
     },
     {
       "id": "2",
-      "name": "Rj Andres",
+      "name": "Jr Andres",
+      "username" : "jrandres",
+      "password" : "abc123",
       "division": "divisionid",
-      "roletype": "Administrator",
+      "roletype": "User",
       "cansign": "false",
       "signingscope": ""
     },
@@ -226,6 +255,8 @@
       "id": "3",
       "name": "Rj Andres",
       "division": "divisionid",
+      "username" : "rjandres",
+      "password" : "abc123",
       "roletype": "Administrator",
       "cansign": "false",
       "signingscope": ""
