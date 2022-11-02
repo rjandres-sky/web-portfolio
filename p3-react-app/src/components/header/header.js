@@ -5,9 +5,21 @@ import './header.css';
 const Header = () => {
     const dispatch = new useDispatch();
     const user = useSelector(state => state.auth);
+    const notification = useSelector(state => state.notification);
+    const received = useSelector(state => state.received)
 
+    const countNotification = received.filter(doc => doc.readStatus===false).length;
+    
     const logoutEventHandler = () => {
         dispatch({ type: 'LOGOUT' })
+    }
+
+    const handlerShowHide = () => {
+        if(notification.action === 'show-list'){
+            dispatch({type: 'HIDE_NOTIFICATION'})
+        } else {
+            dispatch({type: 'SHOW_NOTIFICATION'})
+        }
     }
 
     return (
@@ -24,7 +36,18 @@ const Header = () => {
                         </ul>
                     </>
                 }
-                <h4 className='user-welcome'>  <span> Welcome : { user[0].name.toUpperCase() } </span>  <p onClick={logoutEventHandler}>Log out</p></h4>
+                <h4 className='user-welcome'>  
+                <span> Welcome : { user[0].name.toUpperCase() } </span>
+                <div class="notification">
+                    <img alt="notification" src="https://cdn-icons-png.flaticon.com/512/542/542740.png" onClick={handlerShowHide}/>
+                    {   countNotification !== 0 &&
+                        <span class="badge">
+                        { countNotification}
+                    </span>}
+                </div> 
+                
+                <p onClick={logoutEventHandler}>Log out</p>
+                </h4>
             </nav>
         </>
     )

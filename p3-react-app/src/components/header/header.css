@@ -2,6 +2,7 @@ nav {
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 40px 0 40px;
     background: linear-gradient(0deg, #00caff 0%, #007eff 80%);
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.10);
@@ -17,6 +18,7 @@ nav h1,
 .user-welcome {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .user-welcome span{
@@ -38,13 +40,12 @@ nav h1,
 }
 
 nav ul {
-    text-decoration: none;
+    list-style-type: none;
     display: flex;
     flex-direction: row;
 }
 
 nav ul li {
-    text-decoration: none;
     color: #fff;
     font-weight: 500;
     margin: 0 20px 0 20px;
@@ -54,4 +55,42 @@ nav ul li:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
+
+nav h4 img {
+    cursor: pointer;
+    margin: 0;
+}
+
+.notification .badge {
+ position: absolute;
+  top: -5px;
+  right: -15px;
+  width: 25px;
+  height: 25px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size:  15px;
+  }
+
+  .notification {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  padding: 0px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  }
 
