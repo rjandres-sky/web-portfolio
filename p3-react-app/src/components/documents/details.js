@@ -7,47 +7,76 @@ import DocumentForm from './forms/document-form';
 import DocumentList from './document-list';
 import CurrentDocument from './current-document';
 import CurrentDocumentStatus from './current-document-status';
+import ReceivedDocuments from './received-document';
+import DocumentActionForm from './forms/document-action';
 
 const DocumentDetails = () => {
 
     const dispatch = new useDispatch();
 
-    const docs = useSelector(state => state.documents);
-    const flags = useSelector(state => state.documentFlags);
 
-    console.log(docs)
-    //load Documents
-    const [documents, setDocuments] = useState(null);
+    const flags = useSelector(state => state.documentFlags);
+    const receivedFlag = useSelector(state => state.receivedFlag)
+    const user = useSelector(state => state.auth)
+    const documentsReceived = useSelector(state => state.received)
+    const receivedNotification = useSelector(state => state.notification)
+
+
+    console.dir(documentsReceived)
+    console.log(receivedNotification)
+
+    const currentDivision = user[0].roletype === 'Administrator' ? ''
+        : '?officeDivision=' + user[0].division[0] + '&officeSection=' + user[0].division[1]
+    
+        //load Documents
+    const documents = useSelector(state => state.documents);
+
+
     const [currentDocument, setCurrentDocument] = useState(null)
     const [currentDocumentStatus, setCurrentDocumentStatus] = useState(null)
 
     //select document
     const currentDocumentHandler = (docNo) => {
 
-        setCurrentDocument(documents.filter(doc =>
-            doc.refid === docNo));
+        fetch(`http://localhost:4000/documents?refid=${docNo}`)
+            .then(res => res.json())
+            .then(result => {
+                setCurrentDocument( result )
+            })
+            .catch(console.log)
 
         //display document status
-        fetch("http://localhost:4000/documentstatus?docno=" + docNo)
+        fetch(`http://localhost:4000/documentstatus?docno=${docNo}`)
             .then(res => res.json())
             .then(result => {
                 setCurrentDocumentStatus(result)
             })
             .catch(console.log)
-
     }
 
     // load documents
     useEffect(() => {
-        getDoucments();
+        getDocuments()
     }, [])
 
-    const getDoucments = () => {
-        fetch("http://localhost:4000/documents")
+    const getDocuments = () => {
+        fetch(`http://localhost:4000/documents${currentDivision}`)
             .then(res => res.json())
             .then(result => {
-                console.log(result)
-                setDocuments(result)
+                dispatch({ type: 'LOAD_DOCUMENT', payload: result })
+            })
+            .catch(console.log)
+    }
+
+    useEffect(() => {
+        getReceivedDoucment()
+    }, [])
+
+    const getReceivedDoucment = () => {
+        fetch(`http://localhost:4000/documentstatus?action=Forwarded`)
+            .then(res => res.json())
+            .then(result => {
+                dispatch({ type: 'LOAD_RECEIVED_DOCUMENT', payload: result })
             })
             .catch(console.log)
     }
@@ -61,10 +90,7 @@ const DocumentDetails = () => {
                     body: JSON.stringify(docValue)
                 })
                 .then(res => res.json())
-                .then(result => {
-                    console.log(result)
-                    getDoucments();
-                })
+                .then(getDocuments())
                 .catch(console.log)
 
         } else if (action === "Edit") {
@@ -76,10 +102,7 @@ const DocumentDetails = () => {
                     body: JSON.stringify(docValue.data)
                 })
                 .then(res => res.json())
-                .then(result => {
-                    getDoucments();
-                }
-                )
+                .then(getDocuments())
                 .catch(console.log)
         }
     }
@@ -95,19 +118,30 @@ const DocumentDetails = () => {
     }
 
     return (
-
-
-
         <div className="container">
+            {receivedNotification.action === 'show-list' &&
+                <div className="received-document-container">
+                    <div className='search-container'><input type='search' placeholder='Search Document' /></div>
+                    {documentsReceived &&
+                        documentsReceived.filter(doc => 
+                            (doc.forwardedto.division === user[0].division[0]) && (doc.forwardedto.section === user[0].division[1]) 
+                        ).map(doc => <ReceivedDocuments key={doc.id} document={doc} current={currentDocumentHandler}/>)
+                    }
+                </div>
+            }
             {/* List of Document within Division/Section */}
             <div className="left-container">
-                <div className='search-container'>Search Document <input type='search' /></div>
+                <div className='search-container'>Search Document <input type='search' placeholder='Search Document' /></div>
                 <h4> Pending Documents </h4>
                 {documents && documents.map((doc) =>
                     <DocumentList key={doc.id} document={doc} current={currentDocumentHandler} />
                 )}
 
-                <h4> Done Documents </h4>
+                <h4> Approved Documents </h4>
+                <div className='doucment-list'>
+                    <p>PR-00001</p>
+                </div>
+                <h4> Canceled Documents </h4>
                 <div className='doucment-list'>
                     <p>PR-00001</p>
                 </div>
@@ -130,8 +164,6 @@ const DocumentDetails = () => {
                             currentDocument ? currentDocument.map(doc => <CurrentDocument key={doc.id} current={doc} addDocumentHandler={addDocumentHandler} />) :
                                 <div><h4> No document selected</h4> </div>
                         }
-
-
                     </div>
                 </div>
 
@@ -141,8 +173,12 @@ const DocumentDetails = () => {
                         : <DocumentForm setDocument={saveDocuments} />)
                 }
 
+                {   receivedFlag.makeAction &&
+                    <DocumentActionForm currentHandler={currentDocumentHandler}/>
+                    }
+
                 <div className='body-container-bottom'>
-                    
+                    <p> PDF VIEW HERE</p>
                 </div>
             </div>
             {/* Status of current document */}

@@ -20,6 +20,19 @@
     background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
 }
 
+.form-modal-action {
+    position: relative;
+    width: 40%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px 1px rgba(148, 143, 143, 1);
+    background: #fdf9f9;
+    background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
+}
+
 
 .select-document-container {
     padding: 15px;

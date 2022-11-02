@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from 'moment';
 
 import './document-form.css';
 import ItemsForm from './items-form';
@@ -13,6 +14,11 @@ let refidPrefix = '-' + today.getFullYear() + parseInt(today.getMonth() + 1);
 const PRForm = ({ current, doctype, setDocument }) => {
     const dispatch = new useDispatch();
     const flags = useSelector(state => state.documentFlags)
+
+    //const users = useSelector(state => state.users)
+    const currentUser = useSelector(state => state.auth)
+    //const sections = useSelector(state => state.sections)
+    //const divisions = useSelector(state => state.divisions)
 
     const [items, setNewItem] = useState(flags.documentAction === 'Edit' ? [...current.items] : [])
     const [purpose, setPurpose] = useState(flags.documentAction === 'Edit' ? current.purpose : '');
@@ -59,7 +65,8 @@ const PRForm = ({ current, doctype, setDocument }) => {
                         documentType: doctype,
                         docno: docnoPrefix + '-' + newID,
                         date: currentdate,
-                        officeSection: 'Admin',
+                        officeDivision : currentUser[0].division[0],
+                        officeSection: currentUser[0].division[1],
                         responsibleCenterCode: '',
                         purpose: purpose,
                         requestedBy: { name: '', position: '' },
@@ -68,7 +75,7 @@ const PRForm = ({ current, doctype, setDocument }) => {
                         items: [...items],
                         total: totalCost,
                         Status: 'Pending',
-                        createdBy: { userid: '', name: '', position: '', section: '' }
+                        createdBy: { userid: currentUser.id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
                     }
                     setDocument(docValue, 'New')
                 })
@@ -81,7 +88,8 @@ const PRForm = ({ current, doctype, setDocument }) => {
                 documentType: current.documentType,
                 docno: current.docno,
                 date: current.date,
-                officeSection: 'Admin',
+                officeDivision : current.officeDivision,
+                officeSection: current.officeSection,
                 responsibleCenterCode: '',
                 purpose: purpose,
                 requestedBy: { name: '', position: '' },
@@ -90,12 +98,11 @@ const PRForm = ({ current, doctype, setDocument }) => {
                 items: [...items],
                 total: totalCost,
                 Status: 'Pending',
-                createdBy: { userid: '', name: '', position: '', section: '' }
+                createdBy: { userid: current.createdBy.userid, date :  current.createdBy.date}
             }
             setDocument({id : current.id, data: docValue}, 'Edit')
         }
-
-
+        dispatch({ type: 'Change', payload: { documentAction: '', onAddEditDocument: false } })
     }
 
     const saveItemHandler = (itemData) => {
@@ -112,7 +119,11 @@ const PRForm = ({ current, doctype, setDocument }) => {
         setFlagEditingItem(flag)
     }
 
-    const saveCloseHandler = () => {
+    // const saveCloseHandler = () => {
+    //     dispatch({ type: 'Change', payload: { documentAction: '', onAddEditDocument: false } })
+    // }
+
+    const closeHandler = () => {
         dispatch({ type: 'Change', payload: { documentAction: '', onAddEditDocument: false } })
     }
 
@@ -134,8 +145,7 @@ const PRForm = ({ current, doctype, setDocument }) => {
 
                     <div className='button-container'>
                         <button className="button" onClick={saveDocument}>Save</button>
-                        <button className="button" onClick={saveCloseHandler}>Save and Close</button>
-                        <button className="button" onClick={saveCloseHandler}>Cancel</button>
+                        <button className="button" onClick={closeHandler}>Cancel</button>
                     </div>
                 </div>
                 <div>

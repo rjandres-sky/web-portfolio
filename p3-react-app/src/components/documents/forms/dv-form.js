@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from 'moment';
 
 import './document-form.css';
 
@@ -12,6 +13,7 @@ let refidPrefix = '-' + today.getFullYear() + parseInt(today.getMonth() + 1);
 const DVForm = ({ current, doctype, setDocument }) => {
     const dispatch = new useDispatch();
     const flags = useSelector(state => state.documentFlags)
+    const currentUser = useSelector(state => state.auth)
 
     const [particulars, setParticulars] = useState(flags.documentAction === 'Edit' ? current.particulars : '');
     const [amount, setAmount] = useState(flags.documentAction === 'Edit' ? current.amount : '0.00')
@@ -39,13 +41,14 @@ const DVForm = ({ current, doctype, setDocument }) => {
                         documentType: doctype,
                         docno: docnoPrefix + '-' + newID,
                         date: currentdate,
-                        officeSection: 'Admin',
+                        officeDivision : currentUser[0].division[0],
+                        officeSection: currentUser[0].division[1],
                         particulars: particulars,
                         amount: amount,
                         requestedBy: { name: '', position: '' },
                         approvedBy: { name: '', position: '' },
                         Status: 'Pending',
-                        createdBy: { userid: '', name: '', position: '', section: '' }
+                        createdBy: { userid: currentUser.id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
                     }
                     setDocument(docValue, 'New')
                 })

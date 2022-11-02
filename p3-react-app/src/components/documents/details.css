@@ -21,6 +21,13 @@
     position: sticky;
 }
 
+.search-container input{
+    border-radius: 12px;
+    width: 90%;
+    padding: 5px 10px 5px 10px;
+}
+
+
 .body-container {
     display: grid;
     grid-template-rows: 1fr 2fr;
@@ -42,6 +49,7 @@
     padding: 5px 10px 5px 10px;
     border-radius: 12px;
     background: darkgray;
+    cursor: pointer;
 }
 
 .details-container {
