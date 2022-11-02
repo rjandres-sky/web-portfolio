@@ -1,4 +1,4 @@
-.form-container{
+.form-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -21,7 +21,7 @@
 }
 
 
-.select-document-container{
+.select-document-container {
     padding: 15px;
 }
 
@@ -83,7 +83,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 img {
@@ -115,10 +115,10 @@ img {
     display: flex;
     flex-direction: column;
     position: absolute;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0.1);
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
     visibility: hidden;
-	transition: transform 0.4s, top 0.4s;
+    transition: transform 0.4s, top 0.4s;
     padding: 10px;
     width: 400px;
     border: 6px solid gray;
@@ -129,9 +129,9 @@ img {
 
 }
 
-.show-popup{
-	visibility: visible;
-	transform: translate(-50%, -50%) scale(1);
+.show-popup {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .item-add-edit-container div {
@@ -146,7 +146,7 @@ img {
     align-items: center;
 }
 
-.form-details .detail-container{
+.form-details .detail-container {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -154,20 +154,22 @@ img {
     align-items: flex-start;
     align-content: flex-start;
 }
-.form-details .detail-container textarea{
+
+.form-details .detail-container textarea {
     width: 95%;
     margin-left: 10px;
     margin-right: 10px;
 }
-.form-details .detail-container p{
+
+.form-details .detail-container p {
     margin: 5px;
 }
 
-.form-details .detail-container p span, 
-.form-details .detail-container label{
+.form-details .detail-container p span,
+.form-details .detail-container label {
     font-weight: 500;
 }
 
-#additem{
+#additem {
     width: 200px;
 }

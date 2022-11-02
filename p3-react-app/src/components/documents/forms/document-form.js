@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-//import { useSelector, useDispatch} from "react-redux";
+import React, { useState } from "react";
 
 import './document-form.css';
 
 //components
 import PRForm from './pr-form';
-
-
-let today = new Date()
-let date = today.getDate() + '/' + parseInt(today.getMonth() + 1) + '/' + today.getFullYear()
-let documentNo = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-0001'
+import DVForm from './dv-form';
 
 const DocumentForm = ({ current, setDocument }) => {
 
@@ -36,7 +31,8 @@ const DocumentForm = ({ current, setDocument }) => {
                         <option value="TO">Travel Order</option>
                     </select>
                 </div>
-                {documentType === 'PR' && <PRForm current={current} doctype={documentType} setDocument={saveDocument}/>}
+                {documentType === 'PR' && <PRForm current={current} doctype={documentType} setDocument={saveDocument} />}
+                {documentType === 'DV' && <DVForm current={current} doctype={documentType} setDocument={saveDocument} />}
             </div>
 
         </div>

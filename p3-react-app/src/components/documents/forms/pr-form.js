@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import './document-form.css';
@@ -14,38 +14,10 @@ const PRForm = ({ current, doctype, setDocument }) => {
     const dispatch = new useDispatch();
     const flags = useSelector(state => state.documentFlags)
 
-    const [items, setNewItem] = useState(flags.documentAction == 'Edit' ? [...current.items] : [])
-    const [purpose, setPurpose] = useState(flags.documentAction == 'Edit' ? current.purpose : '');
+    const [items, setNewItem] = useState(flags.documentAction === 'Edit' ? [...current.items] : [])
+    const [purpose, setPurpose] = useState(flags.documentAction === 'Edit' ? current.purpose : '');
     const [flagEditingItem, setFlagEditingItem] = useState(false);
     const [totalCost, setTotalCost] = useState(items.map(item => item.totalcost).reduce((total, value) => parseFloat(total) + parseFloat(value), 0).toFixed(2))
-
-    // useEffect(() => {
-    //     fetch("http://localhost:4000/users",
-    //     { method : "POST",  
-    //     headers : {"Content-Type" : "application/json"},
-    //     body : JSON.stringify(
-    //         {
-    //             "id" : "3",
-    //             "name" : "Rj Andres",
-    //             "division" : "divisionid",
-    //             "roletype" : "Administrator",
-    //             "cansign" : "false",
-    //             "signingscope" : ""
-    //           }
-    //     )
-    //  }
-
-    //     )
-    //         .then(res => res.json())
-    //         .then(result => {
-    //             console.log(result)
-    //             setUsers(result)
-    //         }
-    //         )
-    //             .catch(console.log)
-    // }, users)
-
-    //console.log(users);
 
     const AddItemHandler = () => {
         if (flagEditingItem && items.length === 0) { //flag is from child component
@@ -68,17 +40,24 @@ const PRForm = ({ current, doctype, setDocument }) => {
 
         if (flags.documentAction === 'New') {
             let newID = '';
-            fetch("http://localhost:4000/documents?prno like=" + docnoPrefix)
+            fetch(`http://localhost:4000/documents?docno_like=${docnoPrefix}&documentType=${doctype}`)
                 .then(res => res.json())
                 .then(result => {
-                    let ID = result.reverse()[0].prno;
-                    newID =  (parseInt(ID.substring(ID.length - 4, ID.length)) + 1).toString();
-                    newID = '0'.repeat(4 - newID.length) + newID
+                    console.dir(result)
+                    if(result.length === 0){
+                        newID = '0'.repeat(3) + '1'
+                    } else {
+                        let ID = result.reverse()[0].docno;
+                        newID =  (parseInt(ID.substring(ID.length - 4, ID.length)) + 1).toString();
+                        newID = '0'.repeat(4 - newID.length) + newID
+                    }
+                    
+                    console.log(newID)
                     
                     const docValue = {
                         refid: doctype + refidPrefix + newID,
                         documentType: doctype,
-                        prno: docnoPrefix + '-' + newID,
+                        docno: docnoPrefix + '-' + newID,
                         date: currentdate,
                         officeSection: 'Admin',
                         responsibleCenterCode: '',
@@ -92,19 +71,15 @@ const PRForm = ({ current, doctype, setDocument }) => {
                         createdBy: { userid: '', name: '', position: '', section: '' }
                     }
                     setDocument(docValue, 'New')
-                
-                
                 })
                 .catch(console.log)
-
-                //console.log('Get ID' + newID)
 
         } else if (flags.documentAction === 'Edit') {
 
             const docValue = {
                 refid: current.refid,
                 documentType: current.documentType,
-                prno: current.prno,
+                docno: current.docno,
                 date: current.date,
                 officeSection: 'Admin',
                 responsibleCenterCode: '',
@@ -117,7 +92,7 @@ const PRForm = ({ current, doctype, setDocument }) => {
                 Status: 'Pending',
                 createdBy: { userid: '', name: '', position: '', section: '' }
             }
-            setDocument(docValue, 'Edit')
+            setDocument({id : current.id, data: docValue}, 'Edit')
         }
 
 
@@ -151,8 +126,8 @@ const PRForm = ({ current, doctype, setDocument }) => {
                     <div className="detail-container">
                         <input type='hidden' name='docno' value={documentNo} />
                         <input type='hidden' name='docdate' value={currentdate} onChange={e => e.target.value} />
-                        <p><span>PR No. : </span> {flags.documentAction == 'Edit' ? current.prno : ''}</p>
-                        <p><span>PR Date : </span> {flags.documentAction == 'Edit' ? current.date : currentdate}</p>
+                        <p><span>PR No. : </span> {flags.documentAction === 'Edit' ? current.docno : ''}</p>
+                        <p><span>PR Date : </span> {flags.documentAction === 'Edit' ? current.date : currentdate}</p>
                         <label htmlFor='purpose'>Purpose : </label>
                         <textarea name='purpose' id='purpose' value={purpose} onChange={e => setPurpose(e.target.value)} />
                     </div>

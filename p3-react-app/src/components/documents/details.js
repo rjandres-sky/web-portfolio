@@ -11,7 +11,6 @@ import CurrentDocumentStatus from './current-document-status';
 const DocumentDetails = () => {
 
     const dispatch = new useDispatch();
-    dispatch({ type: 'LOAD' })
 
     const docs = useSelector(state => state.documents);
     const flags = useSelector(state => state.documentFlags);
@@ -53,25 +52,7 @@ const DocumentDetails = () => {
             .catch(console.log)
     }
 
-    // useEffect(() => {
-    //     if(currentDocument !== null) {
-    //     fetch("http://localhost:4000/documentstatus?docno=" + currentDocument.refid)
-    //         .then(res => res.json())
-    //         .then(result => {
-    //             console.log('qqqqqqqq' + result)
-    //             setCurrentDocumentStatus(result)
-    //         })
-    //         .catch(console.log)
-    //     }
-    // }, [])
-
-
-
-
-
-
     const saveDocuments = (docValue, action) => {
-        console.log('save ' + flags.documentFlags)
         if (action === 'New') {
             fetch("http://localhost:4000/documents",
                 {
@@ -87,25 +68,21 @@ const DocumentDetails = () => {
                 .catch(console.log)
 
         } else if (action === "Edit") {
-
-            fetch("http://localhost:4000/documents/" + currentDocument.id,
+            console.dir(docValue)
+            fetch(`http://localhost:4000/documents/${docValue.id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(docValue)
+                    body: JSON.stringify(docValue.data)
                 })
                 .then(res => res.json())
                 .then(result => {
-                    console.debug(result)
                     getDoucments();
                 }
                 )
                 .catch(console.log)
         }
     }
-
-    console.debug('yyyyy' + currentDocument)
-
 
     const addDocumentHandler = (e) => {
 
@@ -165,7 +142,7 @@ const DocumentDetails = () => {
                 }
 
                 <div className='body-container-bottom'>
-                    Canvas for PDF
+                    
                 </div>
             </div>
             {/* Status of current document */}
