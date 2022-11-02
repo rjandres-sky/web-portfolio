@@ -1,5 +1,4 @@
-const reducerDocumentFlags = (state = {documentAction:'', onAddEditDocument:false}, action) => {
-    console.log(action.payload)
+export const reducerDocumentFlags = (state = {documentAction:'', onAddEditDocument:false}, action) => {
     if(action.type === 'Change'){
         return action.payload;
     } else {
@@ -7,4 +6,10 @@ const reducerDocumentFlags = (state = {documentAction:'', onAddEditDocument:fals
     }
 }
 
-export default reducerDocumentFlags;
+export const reducerReceivedFlag = (state={action:'', makeAction:false}, action) => {
+    if(action.type === 'RECEIVED_ACTION'){
+        return action.payload;
+    } else {
+        return state;
+    }
+}
