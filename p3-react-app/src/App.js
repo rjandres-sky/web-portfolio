@@ -1,5 +1,6 @@
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useEffect} from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 
 //components
 import Header from './components/header/header';
@@ -9,6 +10,49 @@ import LoginHeader from './components/auth/header/header';
 import Auth from './components/auth/login/Auth';
 
 function App() {
+  const dispatch = new useDispatch();
+  const getDivisions = () => {
+    fetch(`http://localhost:4000/divisions`)
+        .then(res => res.json())
+        .then(result => {
+            console.log('result123' + result)
+            dispatch({ type: 'LOAD_DIVISIONS', payload: result })
+        })
+        .catch(console.log)
+}
+  useEffect(() => {
+    getDivisions()
+}, [])
+
+
+
+useEffect(() => {
+    getSections()
+}, [])
+
+const getSections = () => {
+    fetch(`http://localhost:4000/sections`)
+        .then(res => res.json())
+        .then(result => {
+            console.log('result123' + result)
+            dispatch({ type: 'LOAD_SECTIONS', payload: result })
+        })
+        .catch(console.log)
+}
+
+useEffect(() => {
+  getUsers()
+}, [])
+
+const getUsers = () => {
+  fetch(`http://localhost:4000/users`)
+      .then(res => res.json())
+      .then(result => {
+          console.log('result123' + result)
+          dispatch({ type: 'LOAD_USERS', payload: result })
+      })
+      .catch(console.log)
+}
 
   const currentUser = useSelector(state => state.auth);
 

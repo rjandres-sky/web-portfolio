@@ -5,7 +5,8 @@
       "documentType": "PR",
       "docno": "2022-01-0001",
       "date": "2022-10-22",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "responsibleCenterCode": "",
       "purpose": "to be used for upgrading",
       "requestedBy": {
@@ -36,7 +37,8 @@
       "documentType": "PR",
       "docno": "2022-01-0002",
       "date": "2022-10-22",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "responsibleCenterCode": "",
       "purpose": "to be used by admin staff",
       "requestedBy": {
@@ -67,7 +69,8 @@
       "documentType": "PR",
       "docno": "2022-01-0004",
       "date": "2022-10-22",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "responsibleCenterCode": "",
       "purpose": "fdsfdsf sdfsdf gfh",
       "requestedBy": {
@@ -147,7 +150,8 @@
       "documentType": "PR",
       "docno": "2022-11-0001",
       "date": "1/11/2022",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "responsibleCenterCode": "",
       "purpose": "",
       "requestedBy": {
@@ -178,7 +182,8 @@
       "documentType": "PR",
       "docno": "2022-11-0002",
       "date": "1/11/2022",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "responsibleCenterCode": "",
       "purpose": "",
       "requestedBy": {
@@ -209,7 +214,8 @@
       "documentType": "DV",
       "docno": "2022-11-0001",
       "date": "1/11/2022",
-      "officeSection": "Admin",
+      "officeDivision": 1,
+      "officeSection": 2,
       "particulars": "xcxzccxcvxv",
       "amount": "0.00",
       "requestedBy": {
@@ -228,72 +234,224 @@
         "section": ""
       },
       "id": 6
+    },
+    {
+      "refid": "PR-2022110003",
+      "documentType": "PR",
+      "docno": "2022-11-0003",
+      "date": "2/11/2022",
+      "officeDivision": 1,
+      "officeSection": 1,
+      "responsibleCenterCode": "",
+      "purpose": "dfkdskjfdjskl kjkldfjlks ",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 7
+    },
+    {
+      "refid": "PR-2022110004",
+      "documentType": "PR",
+      "docno": "2022-11-0004",
+      "date": "2/11/2022",
+      "officeDivision": 1,
+      "officeSection": 1,
+      "responsibleCenterCode": "",
+      "purpose": "hhhhhhhhhhhhhh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "date": "02-11-2022 08:37:23"
+      },
+      "id": 8
+    },
+    {
+      "refid": "PR-2022110005",
+      "documentType": "PR",
+      "docno": "2022-11-0005",
+      "date": "2/11/2022",
+      "officeDivision": "1",
+      "officeSection": "1",
+      "responsibleCenterCode": "",
+      "purpose": "hhhhhhhhhhhhhh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 9
     }
   ],
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Angel Encarnacion",
-      "username" : "encarnacion",
-      "password" : "abc123",
-      "division": "divisionid",
+      "username": "encarnacion",
+      "password": "abc123",
+      "division": [
+        1,
+        1
+      ],
       "roletype": "Director",
       "cansign": "true",
       "signingscope": "All"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Jr Andres",
-      "username" : "jrandres",
-      "password" : "abc123",
-      "division": "divisionid",
+      "username": "jrandres",
+      "password": "abc123",
+      "division": [
+        2,
+        5
+      ],
       "roletype": "User",
       "cansign": "false",
       "signingscope": ""
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Rj Andres",
-      "division": "divisionid",
-      "username" : "rjandres",
-      "password" : "abc123",
+      "username": "rjandres",
+      "division": [
+        1,
+        2
+      ],
+      "password": "abc123",
       "roletype": "Administrator",
       "cansign": "false",
       "signingscope": ""
     }
   ],
-  "division": [
+  "sections": [
     {
+      "id": 1,
+      "division": 1,
+      "section": "ORD",
+      "description": "Office of the Regional Director"
+    },
+    {
+      "id": 2,
+      "division": 1,
+      "section": "MIS",
+      "description": "Management Information Section"
+    },
+    {
+      "id": 8,
+      "division": 1,
+      "section": "FIS",
+      "description": "Fisheries Information Section"
+    },
+    {
+      "id": 3,
+      "division": 2,
+      "section": "HRS",
+      "description": "Human Resources Section"
+    },
+    {
+      "id": 4,
+      "division": 2,
+      "section": "SPU",
+      "description": "Supply and Property Unit"
+    },
+    {
+      "id": 5,
+      "division": 2,
+      "section": "Budget",
+      "description": "Budget Unit"
+    },
+    {
+      "id": 6,
+      "division": 2,
+      "section": "Cashier",
+      "description": "Cashier Unit"
+    },
+    {
+      "id": 7,
+      "division": 2,
+      "section": "Accounting",
+      "description": "Accounting Unit"
+    }
+  ],
+  "divisions": [
+    {
+      "id": 1,
       "division": "ORD",
-      "section": "MIS"
+      "description": "Office of the Regional Director"
+    },
+    {
+      "id": 2,
+      "division": "Admin and Finance",
+      "description": "Administrative and Finance Division"
     }
   ],
   "documentstatus": [
     {
-      "id": 1,
-      "docno": "PR-121212",
-      "action": "Received",
-      "remarks": "",
-      "dateandtime": "",
-      "createdBy": {
-        "userid": "",
-        "name": "Rj Andres",
-        "position": "",
-        "section": ""
-      }
+      "docno": "PR-2022110005",
+      "action": "Forwarded",
+      "dateandtime": "03-11-2022 01:47:52",
+      "userid": 1,
+      "forwardedto": {
+        "division": 1,
+        "section": 2,
+        "empid": null
+      },
+      "readStatus": true,
+      "id": 1
     },
     {
-      "id": 2,
-      "docno": "PR-121212",
-      "action": "Fowarded",
-      "remarks": "For approval",
-      "dateandtime": "",
-      "createdBy": {
-        "userid": "",
-        "name": "Rj Andres",
-        "position": "",
-        "section": ""
-      }
+      "docno": "PR-2022110005",
+      "refid": 1,
+      "action": "Received",
+      "remarks": "",
+      "dateandtime": "03-11-2022 02:34:04",
+      "userid": 3,
+      "readStatus": true,
+      "id": 2
     }
   ]
 }

@@ -1,4 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
+
 const CurrentDocument = ({ current, addDocumentHandler }) => {
+    const dispatch = new useDispatch();
+    const flag = useSelector(state => state.receivedFlag);
+
+    const makeActionHandler = (e) => {
+        dispatch({type:'RECEIVED_ACTION', payload:{action: e.target.name, makeAction:true, current: current.refid, data:flag.data}});
+    }
+    
 
     return (
         <>
@@ -15,7 +24,7 @@ const CurrentDocument = ({ current, addDocumentHandler }) => {
                     className="button"
                     onClick={addDocumentHandler}
                 >Edit</button>
-                <button className="button">Forward</button>
+                <button className="button" name={flag.action} onClick={makeActionHandler}>Action</button>
             </div>
         </>
     )
