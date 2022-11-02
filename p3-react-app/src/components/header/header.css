@@ -1,15 +1,57 @@
 nav {
-    
+
     display: flex;
     justify-content: space-between;
     padding: 0 40px 0 40px;
-    background: linear-gradient(0deg,#00caff 0%, #007eff 80%);
+    background: linear-gradient(0deg, #00caff 0%, #007eff 80%);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.10);
 
-    
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.10);
 }
 
-nav h1, .user-welcome {
+nav h1,
+.user-welcome {
     color: #fff;
-    margin : 10px;
+    margin: 10px;
 }
+
+.user-welcome {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-welcome span{
+    font-weight: 500;
+    font-style: italic;
+    color: red;
+}
+
+.user-welcome p {
+    margin: 0 10px;
+    border: 1px solid #007eff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.user-welcome p:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+nav ul {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul li {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    margin: 0 20px 0 20px;
+}
+
+nav ul li:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
