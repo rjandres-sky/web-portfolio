@@ -1,36 +1,6 @@
 {
   "documents": [
     {
-      "refid": "PR-121213",
-      "documentType": "PR",
-      "docno": "2022-01-0001",
-      "date": "2022-10-22",
-      "officeDivision": 1,
-      "officeSection": 2,
-      "responsibleCenterCode": "",
-      "purpose": "to be used for upgrading",
-      "requestedBy": {
-        "name": "",
-        "position": ""
-      },
-      "recommending": {
-        "name": "",
-        "position": ""
-      },
-      "approvedBy": {
-        "name": "",
-        "position": ""
-      },
-      "items": [],
-      "total": "0.00",
-      "Status": "Pending",
-      "createdBy": {
-        "userid" : 1,
-        "date": "02-11-2022 08:41:53"
-      },
-      "id": 1
-    },
-    {
       "refid": "PR-121212",
       "documentType": "PR",
       "docno": "2022-01-0002",

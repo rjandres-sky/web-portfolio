@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import './received.css';
 
 const CurrentDocumentStatus = ({currentStatus}) => {
     const users = useSelector(state => state.users)
@@ -9,10 +10,10 @@ const CurrentDocumentStatus = ({currentStatus}) => {
     const name = currentUser.name
 
     return (
-        <div> 
+        <div className="status-list"> 
             <p>{currentStatus.action} - by {currentUser.name}</p>
             <p>{currentStatus.remarks}</p>
-            <p>{currentStatus.dateandtime}</p>
+            <small>{currentStatus.dateandtime}</small>
         </div>
     )
 }

@@ -22,8 +22,8 @@ const DocumentDetails = () => {
     const receivedNotification = useSelector(state => state.notification)
 
 
-    console.dir(documentsReceived)
-    console.log(receivedNotification)
+    // console.dir(documentsReceived)
+    // console.log(receivedNotification)
 
     const currentDivision = user[0].roletype === 'Administrator' ? ''
         : '?officeDivision=' + user[0].division[0] + '&officeSection=' + user[0].division[1]
@@ -34,7 +34,8 @@ const DocumentDetails = () => {
 
     const [currentDocument, setCurrentDocument] = useState(null)
     const [currentDocumentStatus, setCurrentDocumentStatus] = useState(null)
-
+    const [search, setSearch] =useState('')
+    const [searchReceived, setSearchReceived] = useState('')
     //select document
     const currentDocumentHandler = (docNo) => {
 
@@ -117,23 +118,31 @@ const DocumentDetails = () => {
         }
     }
 
+    const searchHandler = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const searchReceivedHandler = (e) => {
+        setSearchReceived(e.target.value)
+    }
+
     return (
         <div className="container">
             {receivedNotification.action === 'show-list' &&
                 <div className="received-document-container">
-                    <div className='search-container'><input type='search' placeholder='Search Document' /></div>
+                    <div className='search-container'><input type='search' placeholder='Search Document' onChange={searchReceivedHandler}/></div>
                     {documentsReceived &&
                         documentsReceived.filter(doc => 
                             (doc.forwardedto.division === user[0].division[0]) && (doc.forwardedto.section === user[0].division[1]) 
-                        ).map(doc => <ReceivedDocuments key={doc.id} document={doc} current={currentDocumentHandler}/>)
+                        ).filter(doc => doc.docno.includes(searchReceived.toUpperCase())).map(doc => <ReceivedDocuments key={doc.id} document={doc} current={currentDocumentHandler}/>)
                     }
                 </div>
             }
             {/* List of Document within Division/Section */}
             <div className="left-container">
-                <div className='search-container'>Search Document <input type='search' placeholder='Search Document' /></div>
+                <div className='search-container'>Search Document <input type='search' placeholder='Search Document' onChange={searchHandler}/></div>
                 <h4> Pending Documents </h4>
-                {documents && documents.map((doc) =>
+                {documents && documents.filter(doc => doc.refid.includes(search.toUpperCase())).map((doc) =>
                     <DocumentList key={doc.id} document={doc} current={currentDocumentHandler} />
                 )}
 
