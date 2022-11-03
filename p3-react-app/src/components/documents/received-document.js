@@ -6,7 +6,7 @@ const ReceivedDocuments = ({ document, current}) => {
         current(document.docno);
 
         if(document.readStatus) {
-            dispatch({type:'RECEIVED_ACTION', payload:{action:'Forward', current: document.docno, makeAction:false}});
+            dispatch({type:'RECEIVED_ACTION', payload:{action:'Forward', current: document.docno, makeAction:false, data:document}});
         } else {
             dispatch({type:'RECEIVED_ACTION', payload:{action:'Receive', makeAction:false, data:document}});
         }

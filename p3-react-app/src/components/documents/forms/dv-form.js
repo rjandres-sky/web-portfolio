@@ -48,7 +48,7 @@ const DVForm = ({ current, doctype, setDocument }) => {
                         requestedBy: { name: '', position: '' },
                         approvedBy: { name: '', position: '' },
                         Status: 'Pending',
-                        createdBy: { userid: currentUser.id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
+                        createdBy: { userid: currentUser[0].id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
                     }
                     setDocument(docValue, 'New')
                 })

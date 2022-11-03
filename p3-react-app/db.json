@@ -25,10 +25,8 @@
       "total": "0.00",
       "Status": "Pending",
       "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+        "userid" : 1,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 1
     },
@@ -57,10 +55,8 @@
       "total": "",
       "Status": "Pending",
       "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+        "userid" : 3,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 2
     },
@@ -138,10 +134,8 @@
       "total": "422.00",
       "Status": "Pending",
       "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+        "userid" : 1,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 3
     },
@@ -170,10 +164,8 @@
       "total": "0.00",
       "Status": "Pending",
       "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+        "userid" : 1,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 4
     },
@@ -228,10 +220,8 @@
       },
       "Status": "Pending",
       "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+        "userid" : 2,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 6
     },
@@ -259,11 +249,8 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {
-        "userid": "",
-        "name": "",
-        "position": "",
-        "section": ""
+      "createdBy": {"userid" : 2,
+      "date": "02-11-2022 08:41:53"
       },
       "id": 7
     },
@@ -291,7 +278,7 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {
+      "createdBy": {"userid" : 1,
         "date": "02-11-2022 08:37:23"
       },
       "id": 8
@@ -320,7 +307,7 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {
+      "createdBy": {"userid" : 1,
         "date": "02-11-2022 08:41:53"
       },
       "id": 9

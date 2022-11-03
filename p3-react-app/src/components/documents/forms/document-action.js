@@ -12,8 +12,12 @@ const DocumentActionForm = ({currentHandler}) => {
     const users = useSelector(state => state.users)
     const currentUser = useSelector(state => state.auth)
 
-    const currentUserFind = flag.action === 'Receive' && users.find(user => user.id === flag.data.userid);
+    const currentUserFind = users.find(user => user.id === flag.data.userid || user.id === flag.data.createdBy.userid) ;
     const name = currentUserFind.name
+    console.log(currentUserFind.division[0])
+    const divisionFind = divisions.find(div => div.id === currentUserFind.division[0]).description
+
+
 
     const [division, setDivision] = useState('select');
     const [section, setSection] = useState('select');
@@ -114,9 +118,9 @@ const DocumentActionForm = ({currentHandler}) => {
                     <div className="form-details">
 
                         <div className="detail-container">
-                            <p><span>Document No. : {flag.data && flag.data.docno}</span> </p>
+                            <p><span>Document No. : {flag.data && flag.data.docno || flag.current}</span> </p>
                             <p><span>Document Date : {flag.data && flag.data.dateandtime}</span> </p>
-                            <p><span>Responsible : {name}</span> </p>
+                            <p><span>Responsible : {divisionFind}</span> </p>
                             <p><span>Sender : {name}</span> </p>
                             
 

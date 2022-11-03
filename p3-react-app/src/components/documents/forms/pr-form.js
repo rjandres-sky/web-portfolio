@@ -75,7 +75,7 @@ const PRForm = ({ current, doctype, setDocument }) => {
                         items: [...items],
                         total: totalCost,
                         Status: 'Pending',
-                        createdBy: { userid: currentUser.id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
+                        createdBy: { userid: currentUser[0].id, date: moment(today).format("DD-MM-YYYY hh:mm:ss")}
                     }
                     setDocument(docValue, 'New')
                 })

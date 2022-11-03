@@ -186,3 +186,8 @@ img {
 #additem {
     width: 200px;
 }
+
+.form-details .detail-container select{
+    padding : 5px 10px 5px 10px;
+    border-radius: 12px;
+}
