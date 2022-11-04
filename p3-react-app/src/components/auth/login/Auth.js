@@ -44,7 +44,7 @@ const Auth = () => {
                         </div>
                         {errMsg !== '' && <div className="error-message"><small> {errMsg} </small></div>}
                         <div className="button-container">
-                            <input type="submit" onClick={loginEventHandler}/>
+                            <input type="submit" onClick={loginEventHandler} value="Login"/>
                         </div>
                     </form>
                 </div>

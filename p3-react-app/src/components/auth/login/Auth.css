@@ -46,10 +46,12 @@ input[type="submit"]:hover {
   display: flex;
 }
 
-.error {
+.error, .error-message {
   color: red;
   font-size: 12px;
 }
+
+
 
 .title {
   font-size: 25px;

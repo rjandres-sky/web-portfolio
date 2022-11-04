@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './details.css';
 
@@ -9,6 +9,8 @@ import CurrentDocument from './current-document';
 import CurrentDocumentStatus from './current-document-status';
 import ReceivedDocuments from './received-document';
 import DocumentActionForm from './forms/document-action';
+import { PDFDocument } from './PDFDocument';
+import { PDFViewer } from '@react-pdf/renderer';
 
 const DocumentDetails = () => {
 
@@ -27,14 +29,14 @@ const DocumentDetails = () => {
 
     const currentDivision = user[0].roletype === 'Administrator' ? ''
         : '?officeDivision=' + user[0].division[0] + '&officeSection=' + user[0].division[1]
-    
-        //load Documents
+
+    //load Documents
     const documents = useSelector(state => state.documents);
 
 
     const [currentDocument, setCurrentDocument] = useState(null)
     const [currentDocumentStatus, setCurrentDocumentStatus] = useState(null)
-    const [search, setSearch] =useState('')
+    const [search, setSearch] = useState('')
     const [searchReceived, setSearchReceived] = useState('')
     //select document
     const currentDocumentHandler = (docNo) => {
@@ -42,7 +44,7 @@ const DocumentDetails = () => {
         fetch(`http://localhost:4000/documents?refid=${docNo}`)
             .then(res => res.json())
             .then(result => {
-                setCurrentDocument( result )
+                setCurrentDocument(result)
             })
             .catch(console.log)
 
@@ -95,7 +97,6 @@ const DocumentDetails = () => {
                 .catch(console.log)
 
         } else if (action === "Edit") {
-            console.dir(docValue)
             fetch(`http://localhost:4000/documents/${docValue.id}`,
                 {
                     method: "PUT",
@@ -130,17 +131,17 @@ const DocumentDetails = () => {
         <div className="container">
             {receivedNotification.action === 'show-list' &&
                 <div className="received-document-container">
-                    <div className='search-container'><input type='search' placeholder='Search Document' onChange={searchReceivedHandler}/></div>
+                    <div className='search-container'><input type='search' placeholder='Search Document' onChange={searchReceivedHandler} /></div>
                     {documentsReceived &&
-                        documentsReceived.filter(doc => 
-                            (doc.forwardedto.division === user[0].division[0]) && (doc.forwardedto.section === user[0].division[1]) 
-                        ).filter(doc => doc.docno.includes(searchReceived.toUpperCase())).map(doc => <ReceivedDocuments key={doc.id} document={doc} current={currentDocumentHandler}/>)
+                        documentsReceived.filter(doc =>
+                            (doc.forwardedto.division === user[0].division[0]) && (doc.forwardedto.section === user[0].division[1])
+                        ).filter(doc => doc.docno.includes(searchReceived.toUpperCase())).map(doc => <ReceivedDocuments key={doc.id} document={doc} current={currentDocumentHandler} />)
                     }
                 </div>
             }
             {/* List of Document within Division/Section */}
             <div className="left-container">
-                <div className='search-container'>Search Document <input type='search' placeholder='Search Document' onChange={searchHandler}/></div>
+                <div className='search-container'>Search Document <input type='search' placeholder='Search Document' onChange={searchHandler} /></div>
                 <h4> Pending Documents </h4>
                 {documents && documents.filter(doc => doc.refid.includes(search.toUpperCase())).map((doc) =>
                     <DocumentList key={doc.id} document={doc} current={currentDocumentHandler} />
@@ -182,12 +183,21 @@ const DocumentDetails = () => {
                         : <DocumentForm setDocument={saveDocuments} />)
                 }
 
-                {   receivedFlag.makeAction &&
-                    <DocumentActionForm currentHandler={currentDocumentHandler}/>
-                    }
+                {receivedFlag.makeAction &&
+                    <DocumentActionForm currentHandler={currentDocumentHandler} />
+                }
 
                 <div className='body-container-bottom'>
                     <p> PDF VIEW HERE</p>
+                    <Fragment>
+                        <PDFViewer width='100%' height='100%'>
+                            {
+                                currentDocument ? currentDocument.map(doc => <PDFDocument key={doc.id} current={doc} />) :
+                                <div><h4> No document selected</h4> </div>
+                            }
+                            
+                        </PDFViewer>
+                    </Fragment>
                 </div>
             </div>
             {/* Status of current document */}
@@ -209,4 +219,5 @@ const DocumentDetails = () => {
         </div>
     )
 }
+
 export default DocumentDetails;

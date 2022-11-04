@@ -25,7 +25,7 @@
       "total": "",
       "Status": "Pending",
       "createdBy": {
-        "userid" : 3,
+        "userid": 3,
         "date": "02-11-2022 08:41:53"
       },
       "id": 2
@@ -104,7 +104,7 @@
       "total": "422.00",
       "Status": "Pending",
       "createdBy": {
-        "userid" : 1,
+        "userid": 1,
         "date": "02-11-2022 08:41:53"
       },
       "id": 3
@@ -134,7 +134,7 @@
       "total": "0.00",
       "Status": "Pending",
       "createdBy": {
-        "userid" : 1,
+        "userid": 1,
         "date": "02-11-2022 08:41:53"
       },
       "id": 4
@@ -190,7 +190,7 @@
       },
       "Status": "Pending",
       "createdBy": {
-        "userid" : 2,
+        "userid": 2,
         "date": "02-11-2022 08:41:53"
       },
       "id": 6
@@ -219,8 +219,9 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {"userid" : 2,
-      "date": "02-11-2022 08:41:53"
+      "createdBy": {
+        "userid": 2,
+        "date": "02-11-2022 08:41:53"
       },
       "id": 7
     },
@@ -248,7 +249,8 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {"userid" : 1,
+      "createdBy": {
+        "userid": 1,
         "date": "02-11-2022 08:37:23"
       },
       "id": 8
@@ -277,10 +279,54 @@
       "items": [],
       "total": "0.00",
       "Status": "Pending",
-      "createdBy": {"userid" : 1,
+      "createdBy": {
+        "userid": 1,
         "date": "02-11-2022 08:41:53"
       },
       "id": 9
+    },
+    {
+      "refid": "PR-2022110006",
+      "documentType": "PR",
+      "docno": "2022-11-0006",
+      "date": "3/11/2022",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "for mis used",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [
+        {
+          "id": 0,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "Ink",
+            "itemdesc": "black"
+          },
+          "qty": 1,
+          "unitcost": "24.00",
+          "totalcost": "24.00"
+        }
+      ],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 3,
+        "date": "03-11-2022 01:33:57"
+      },
+      "id": 10
     }
   ],
   "users": [
@@ -388,27 +434,18 @@
   ],
   "documentstatus": [
     {
-      "docno": "PR-2022110005",
+      "docno": "PR-2022110006",
       "action": "Forwarded",
-      "dateandtime": "03-11-2022 01:47:52",
-      "userid": 1,
-      "forwardedto": {
-        "division": 1,
-        "section": 2,
-        "empid": null
-      },
-      "readStatus": true,
-      "id": 1
-    },
-    {
-      "docno": "PR-2022110005",
-      "refid": 1,
-      "action": "Received",
-      "remarks": "",
-      "dateandtime": "03-11-2022 02:34:04",
+      "remarks": "for reccomending approval",
+      "dateandtime": "03-11-2022 01:53:16",
       "userid": 3,
-      "readStatus": true,
-      "id": 2
+      "forwardedto": {
+        "division": 2,
+        "section": 5,
+        "empid": 2
+      },
+      "readStatus": false,
+      "id": 1
     }
   ]
 }

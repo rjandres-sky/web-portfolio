@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import './document-form.css';
 
-const DocumentActionForm = ({currentHandler}) => {
+const DocumentActionForm = ({ currentHandler }) => {
     const dispatch = new useDispatch();
     const flag = useSelector(state => state.receivedFlag);
     const divisions = useSelector(state => state.divisions)
@@ -12,13 +12,14 @@ const DocumentActionForm = ({currentHandler}) => {
     const users = useSelector(state => state.users)
     const currentUser = useSelector(state => state.auth)
 
-    const currentUserFind = users.find(user => user.id === flag.data.userid || user.id === flag.data.createdBy.userid) ;
+    const currentUserFind = users.find(user => user.id === flag.data.userid || user.id === flag.data.createdBy.userid);
     const name = currentUserFind.name
-    console.log(currentUserFind.division[0])
     const divisionFind = divisions.find(div => div.id === currentUserFind.division[0]).description
+    const [Approve, setApprove] = useState('')
 
+    const currentDoc = useSelector(state => state.documents.filter(doc => doc.refid === flag.data.docno || doc.refid === flag.data.refid))
 
-
+    console.log('current ----- ' + currentDoc[0])
     const [division, setDivision] = useState('select');
     const [section, setSection] = useState('select');
     const [user, setUser] = useState('select');
@@ -45,11 +46,39 @@ const DocumentActionForm = ({currentHandler}) => {
                     })
                 })
                 .then(res => res.json())
-                .then()
+                .then(result => {
+                    dispatch({ type: 'RECEIVED_ACTION', payload: { action: 'Receive', makeAction: false, data: result } });
+                    currentHandler(flag.current)
+                })
                 .catch(console.log)
 
-                dispatch({ type: 'RECEIVED_ACTION', payload: { action: 'Receive', makeAction: false } });
-                currentHandler(flag.current)
+                if(Approve === 'checked') {
+                    fetch(`http://localhost:4000/documents/${currentDoc.id}`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        refid: currentDoc.refid,
+                        documentType: currentDoc.documentType,
+                        docno: currentDoc.docno,
+                        date: currentDoc.date,
+                        officeDivision : currentDoc.officeDivision,
+                        officeSection: currentDoc.officeSection,
+                        responsibleCenterCode: currentDoc.responsibleCenterCode,
+                        purpose: currentDoc.purpose,
+                        requestedBy: currentDoc.requestedBy,
+                        recommending: currentDoc.recommending,
+                        approvedBy: currentDoc.approvedBy,
+                        items: currentDoc.items,
+                        total: currentDoc.total,
+                        Status: 'Approved',
+                        createdBy: currentDoc.createdBy
+                    })
+                })
+                .then(res => res.json())
+                .then(result => dispatch({ type: 'LOAD_RECEIVED_DOCUMENT', payload: result }))
+                .catch(console.log)    
+                }
 
         } else if (e.target.name === 'Receive') {
             fetch(`http://localhost:4000/documentstatus/${flag.data.id}`,
@@ -71,16 +100,19 @@ const DocumentActionForm = ({currentHandler}) => {
                     })
                 })
                 .then(res => res.json())
-                .then()
+                .then(result => {
+                    dispatch({ type: 'RECEIVED_ACTION', payload: { action: 'Forward', makeAction: false, data: result } });
+                    currentHandler(flag.data.docno)
+                })
                 .catch(console.log)
 
-                fetch("http://localhost:4000/documentstatus",
+            fetch("http://localhost:4000/documentstatus",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         docno: flag.data.docno,
-                        refid : flag.data.id,
+                        refid: flag.data.id,
                         action: "Received",
                         remarks: remark,
                         dateandtime: moment(new Date()).format("DD-MM-YYYY hh:mm:ss"),
@@ -91,9 +123,6 @@ const DocumentActionForm = ({currentHandler}) => {
                 .then(res => res.json())
                 .then()
                 .catch(console.log)
-
-                dispatch({ type: 'RECEIVED_ACTION', payload: { action: 'Forward', makeAction: false } });
-                currentHandler(flag.data.docno)
         }
 
         fetch(`http://localhost:4000/documentstatus?action=Forwarded`)
@@ -102,11 +131,22 @@ const DocumentActionForm = ({currentHandler}) => {
                 dispatch({ type: 'LOAD_RECEIVED_DOCUMENT', payload: result })
             })
             .catch(console.log)
-        
+
     }
 
     const closeActionHandler = () => {
-        dispatch({ type: 'RECEIVED_ACTION', payload: { action: flag.action, makeAction: false } });
+        dispatch({ type: 'RECEIVED_ACTION', payload: { action: flag.action, makeAction: false, data: flag.data } });
+    }
+
+    const approveHandler = (e) => {
+        console.log(e.target.value)
+        if (Approve === '') {
+            setApprove('checked')
+            setRemark('Approved')
+        } else {
+            setApprove('')
+            setRemark('')
+        }
     }
 
     return (
@@ -122,7 +162,7 @@ const DocumentActionForm = ({currentHandler}) => {
                             <p><span>Document Date : {flag.data && flag.data.dateandtime}</span> </p>
                             <p><span>Responsible : {divisionFind}</span> </p>
                             <p><span>Sender : {name}</span> </p>
-                            
+
 
                             {
                                 flag.action === 'Forward' &&
@@ -131,7 +171,7 @@ const DocumentActionForm = ({currentHandler}) => {
                                     <select className='division' name="division" value={division} onChange={e => { setDivision(e.target.value); setSection('select'); setUser('select') }}>
                                         <option value="select">Select</option>
                                         {
-                                            divisions.map(div => <option key= {div.id} value={div.id}>{div.description}</option>)
+                                            divisions.map(div => <option key={div.id} value={div.id}>{div.description}</option>)
                                         }
                                     </select>
 
@@ -154,10 +194,15 @@ const DocumentActionForm = ({currentHandler}) => {
                                                     .map(user => <option key={user.id} value={user.id}>{user.name}</option>)
                                         }
                                     </select>
+
+                                    <label> Approve Document
+                                        <input type="checkbox" checked={Approve} onChange={approveHandler} />
+                                        <span className="checkmark"></span>
+                                    </label>
                                 </>}
 
                             <label htmlFor='remark'>Message : </label>
-                            <textarea name='remark' id='remark' value={remark} onChange={e => setRemark(e.target.value)}/>
+                            <textarea name='remark' id='remark' value={remark} onChange={e => setRemark(e.target.value)} />
                         </div>
 
                         <div className='button-container'>

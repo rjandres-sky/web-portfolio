@@ -1,6 +1,9 @@
 import './App.css';
-import { useEffect} from 'react';
+import { useEffect, Fragment} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
+import { PDFDocument } from './components/documents/PDFDocument';
+import { PDFViewer } from '@react-pdf/renderer';
+import  ReactDOM  from 'react-dom';
 
 //components
 import Header from './components/header/header';
@@ -61,6 +64,8 @@ const getUsers = () => {
     <div className="App">
       {currentUser.length === 0 &&
         <>
+        
+
           <LoginHeader/>
           <Auth />
           <Footer />
@@ -80,3 +85,4 @@ const getUsers = () => {
 }
 
 export default App;
+

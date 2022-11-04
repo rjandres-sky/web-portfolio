@@ -8,7 +8,9 @@ const Header = () => {
     const notification = useSelector(state => state.notification);
     const received = useSelector(state => state.received)
 
-    const countNotification = received.filter(doc => doc.readStatus===false).length;
+    const countNotification = received.filter(doc => doc.readStatus===false).filter(doc => 
+        (doc.forwardedto.division === user[0].division[0]) && (doc.forwardedto.section === user[0].division[1]) 
+    ).length;
     
     const logoutEventHandler = () => {
         dispatch({ type: 'LOGOUT' })

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ItemsForm = ({ items, saveItem, flagEditing }) => {
+const ItemsForm = ({ items, saveItem, flagEditing, deleteItem }) => {
     const [itemList, setItemList] = useState(items);
 
     const [unit, setUnit] = useState(items.unit);
@@ -114,12 +114,12 @@ const ItemsForm = ({ items, saveItem, flagEditing }) => {
             setFlag(false);
             flagEditing(false);
             saveItem(items);
-            console.log('ffffffffffff' + items.description);
         }
     }
     const cancelItemHandler = (itemData) => {
         if (!flag) {
             //delete
+            deleteItem(items.id)
         } else {
             setFlag(false);
             flagEditing(false);

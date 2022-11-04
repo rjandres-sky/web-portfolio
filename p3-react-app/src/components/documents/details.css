@@ -12,6 +12,13 @@
     border: 1px solid pink;
 } */
 
+.body-container-bottom{
+    width: 100% !important;
+    height: auto !important;
+    border: 1px solid red;
+    padding: 0;
+}
+
 .left-container {
     overflow-y: scroll;
 }

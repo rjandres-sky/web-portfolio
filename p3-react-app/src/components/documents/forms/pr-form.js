@@ -115,6 +115,10 @@ const PRForm = ({ current, doctype, setDocument }) => {
         //setTotalCost(items.map(item => item.totalcost).reduce((total, value) => parseFloat(total) + parseFloat(value), 0).toFixed(2));
     }
 
+    const deleteItemHandle = (id) => {
+        setNewItem([...items.filter(item => item.id !== id)])
+    }
+
     const FlagEditingHandler = (flag) => {
         setFlagEditingItem(flag)
     }
@@ -165,7 +169,7 @@ const PRForm = ({ current, doctype, setDocument }) => {
                     </div>
                 }
                 {
-                    items.length === 0 ? <h3> No Item found</h3> : items.map(item => <ItemsForm key={item.id} items={item} saveItem={saveItemHandler} flagEditing={FlagEditingHandler} />)
+                    items.length === 0 ? <h3> No Item found</h3> : items.map(item => <ItemsForm key={item.id} items={item} saveItem={saveItemHandler} flagEditing={FlagEditingHandler} deleteItem={deleteItemHandle} />)
                 }
                 {
                     items.length !== 0 &&
