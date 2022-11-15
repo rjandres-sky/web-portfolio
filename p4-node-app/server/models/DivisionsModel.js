@@ -12,4 +12,4 @@ const DivisionsSchema = new Schema ({
     Sections : [SectionsSchema]
 })
 
-module.exports = Schema.model('divisions', DivisionsSchema);
+module.exports = mongoose.model('divisions', DivisionsSchema);
