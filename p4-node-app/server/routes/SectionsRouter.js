@@ -2,12 +2,12 @@ const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
-const Divisions = require('../models/DivisionsModel');
+const Sections = require('../models/SectionsModel');
 
 
 router.get('/', (request, response) => {
-    Divisions.find()
-    .select({"sections._id" : 1, "sections.section" : 1, "sections.description" : 1})
+    Sections.find()
+    .populate('division')
     .then(
         result => {
             console.log(result)
@@ -16,8 +16,8 @@ router.get('/', (request, response) => {
 })
 
 router.get('/:id', (request, response) => {
-    Divisions.sections.findOne({ _id: request.params.id })
-    .select({"sections._id" : 1, "sections.section" : 1, "sections.description" : 1})
+    Sections.findOne({ _id: request.params.id })
+    .populate('division')
     .then(
         result => {
             console.log(result)
@@ -25,21 +25,17 @@ router.get('/:id', (request, response) => {
         })
 })
 
-router.post('/:id', async (request, response) => {
-    Divisions.updateOne(
-        { _id: request.params.id }, 
-        { $addToSet: { sections : request.body } })
+router.post('/', async (request, response) => {
+    Sections.create( request.body )
     .then( result => {
-        if( result.modifiedCount === 1 ){
             response.send({ status: "New Section added", result : result });
-        }
     });
 })
 
 router.put('/:id', ( request, response ) => {
-    users.findOneAndUpdate( 
-        { "sections._id":request.params.id}, 
-        { $set: { "sections.$" : request.body } })
+    Sections.updateOne( 
+        { _id:request.params.id}, 
+        { $set: { ...request.body } })
     .then( result => {
             response.send({ status: "Post has been updated", result : result});
     });
