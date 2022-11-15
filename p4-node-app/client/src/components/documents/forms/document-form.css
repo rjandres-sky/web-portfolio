@@ -1,0 +1,193 @@
+.form-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-modal {
+    position: relative;
+    width: 65%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px 1px rgba(148, 143, 143, 1);
+    background: #fdf9f9;
+    background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
+}
+
+.form-modal-action {
+    position: relative;
+    width: 40%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px 1px rgba(148, 143, 143, 1);
+    background: #fdf9f9;
+    background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
+}
+
+
+.select-document-container {
+    padding: 15px;
+}
+
+.select-document-container select {
+    padding: 5px;
+}
+
+.form-details {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.form-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 5px 20px 5px 20px;
+}
+
+.item-stock {
+    width: 100%;
+    padding: 5px;
+}
+
+.item-unit {
+    width: 100%;
+    padding: 5px;
+}
+
+.item-description {
+    width: 80%;
+    padding: 5px;
+}
+
+.input-button {
+    padding: 5px;
+}
+
+.item-qty {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+
+.item-unitcost {
+    width: 100%;
+    padding: 5px;
+    text-align: right;
+}
+
+.item-totalcost {
+    width: 100%;
+    padding: 5px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.item-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+img {
+    width: 20px;
+    margin: 1px;
+    ;
+}
+
+.item-input-container {
+    width: 250px;
+    border: 1px solid #a9a9a9;
+    display: inline-block;
+}
+
+.item-input-container input:focus,
+.item-input-container input:active {
+    outline: none;
+}
+
+.item-input-container input {
+    width: 80%;
+}
+
+.item-input-container button {
+    float: right;
+}
+
+.item-add-edit-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+    padding: 10px;
+    width: 400px;
+    border: 6px solid gray;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px 1px rgba(148, 143, 143, 1);
+    background: #fdf9f9;
+    background: linear-gradient(73deg, #fdf9f9 0%, #eff0ef 80%);
+
+}
+
+.show-popup {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.item-add-edit-container div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 10px;
+}
+
+.item-add-edit-container .add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-details .detail-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.form-details .detail-container textarea {
+    width: 95%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.form-details .detail-container p {
+    margin: 5px;
+}
+
+.form-details .detail-container p span,
+.form-details .detail-container label {
+    font-weight: 500;
+}
+
+#additem {
+    width: 200px;
+}
+
+.form-details .detail-container select{
+    padding : 5px 10px 5px 10px;
+    border-radius: 12px;
+}

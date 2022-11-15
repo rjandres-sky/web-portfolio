@@ -1,0 +1,51 @@
+.received-document-container{
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    width: 300px;
+    height: 80%;
+    border: 1px solid gray;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.received-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    text-align: left;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.received-item:hover{
+    transform: scale(1.05);
+}
+
+.received-item p{
+    margin: 0;
+}
+
+.received-item small{
+    color: dodgerblue;
+}
+
+.received-item .mark-read{
+    font-weight: 500;
+    margin: 0;
+}
+
+.status-list {
+    margin-top: 10px;
+}
+.status-list p{
+    margin: 0;
+}
+
+.status-list small{
+    color: dodgerblue;
+}
