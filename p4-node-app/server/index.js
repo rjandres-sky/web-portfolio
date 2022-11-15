@@ -16,7 +16,9 @@ server.use( bodyParser.json() );
 // import routers
 const UsersRouter = require('./routes/UsersRouter')
 const DivisionsRouter = require('./routes/DivisionsRouter')
-const SectionsRouter = require('./routes/SectionsRouter')
+const SectionsRouter = require('./routes/SectionsRouter');
+const AuthRouter  = require('./routes/Auth');
+const DocumentsRouter = require('./routes/DocumentsRouter')
 
 mongoose.connect('mongodb://localhost:27017/documenttracking', { useNewUrlParser: true });
 
@@ -27,7 +29,9 @@ server.get('/', ( request, response ) => {
 server.use('/users', UsersRouter ); //users router
 server.use('/divisions', DivisionsRouter ); //divisions router
 server.use('/sections', SectionsRouter ); // sections router
-
+server.use('/auth', AuthRouter) //login router
+server.use('/documents', DocumentsRouter) //documents router
+//server.use('/status')
 
 server.listen(
     port, 
