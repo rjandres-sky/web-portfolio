@@ -24,7 +24,7 @@ server.get('/', ( request, response ) => {
     response.send(`Welcome to Uplifting API`);
 });
 
-server.use('/users', UsersRouter ); //user router
+server.use('/users', UsersRouter ); //users router
 server.use('/divisions', DivisionsRouter ); //divisions router
 server.use('/sections', SectionsRouter ); // sections router
 

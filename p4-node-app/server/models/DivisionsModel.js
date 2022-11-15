@@ -9,7 +9,7 @@ const SectionsSchema = new Schema ({
 const DivisionsSchema = new Schema ({
     division : String,
     description : String,
-    Sections : [SectionsSchema]
+    sections : [SectionsSchema]
 })
 
 module.exports = mongoose.model('divisions', DivisionsSchema);

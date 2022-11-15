@@ -13,7 +13,6 @@ router.get('/', (request, response) => {
             console.log(result)
             response.send(result)        
         })
-        console.log(users)
 })
 
 router.get('/:id', (request, response) => {
@@ -24,7 +23,6 @@ router.get('/:id', (request, response) => {
             console.log(result)
             response.send(result)        
         })
-        console.log(users)
 })
 
 router.post('/:id', async (request, response) => {
