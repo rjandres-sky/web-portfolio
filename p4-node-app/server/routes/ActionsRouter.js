@@ -13,6 +13,18 @@ router.get('/:id', (request, response) => {
             })
 })
 
+router.get('/', (request, response) => {
+    Actions.find()
+    .populate({path : 'createdby', select : 'name', 
+    populate : {path : 'section', select : 'section',
+    populate : 'division'
+}})
+        .then(
+            result => {
+                response.send(result)
+            })
+})
+
 router.post('/', async (request, response) => {
     Actions.create( request.body )
     .then( result => {

@@ -53,7 +53,7 @@ router.put('/:id/change', async(request, response) => {
 router.put('/:id', (request, response) => {
     users.updateOne(
         { _id: request.params.id },
-        { $set: { "sections.$.employees.$[emp]": request.body } })
+        { $set: { ...request.body } })
         .then(result => {
             if (result.modifiedCount === 1) {
                 response.send({ status: "User has been updated", result: result });
@@ -67,7 +67,7 @@ router.delete('/:id', (request, response) => {
         .then(result => {
             if (result.deletedCount === 1) {
                 response.send({
-                    status: "Comment has been deleted"
+                    status: "Users has been deleted"
                 });
             }
         });

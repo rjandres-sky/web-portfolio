@@ -18,9 +18,8 @@ const DocumentsSchema = new Schema({
     documenttype : String,
     documentno : String,
     documentdate : String,
-    section : {type : Schema.Types.ObjectId, ref: 'divisions'},
+    section : {type : Schema.Types.ObjectId, ref: 'sections'},
     document : PRSchema, //use discriminator
-    actions : ActionsSchema,
     status : String,
     createdby : {type : Schema.Types.ObjectId, ref: 'users'},
     dateCreated: { type: Date, default: Date.now },

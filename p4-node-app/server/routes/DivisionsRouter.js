@@ -24,7 +24,7 @@ router.get('/:id', (request, response) => {
         })
 })
 
-router.post('/add', async (request, response) => {
+router.post('/', async (request, response) => {
     Divisions.create(request.body)
     .then(result => {
         response.send({status : "New Division added", result : result})

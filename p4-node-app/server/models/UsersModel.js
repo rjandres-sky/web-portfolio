@@ -5,7 +5,7 @@ const UsersSchema = new Schema ({
     empid : String,
     name : {lastname : String, firstname: String, middlename: String},
     position : String,
-    section : {type : Schema.Types.ObjectId, ref : 'divisions.sections'},
+    section : {type : Schema.Types.ObjectId, ref : 'sections'},
     username : String,
     password : String,
     role : String,
