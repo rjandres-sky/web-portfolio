@@ -11,7 +11,7 @@ server.use(express.json())
 server.use(morgan('dev'));
 server.use(cors());
 server.use(bodyParser.json());
-//server.use( helmet() );
+server.use( helmet() );
 
 // import routers
 const UsersRouter = require('./routes/UsersRouter');
