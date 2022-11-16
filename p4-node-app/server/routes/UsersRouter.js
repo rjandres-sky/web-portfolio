@@ -11,7 +11,7 @@ router.get('/', (request, response) => {
             result => {
                 response.send(result)
             })
-    console.log(users)
+        .catch(response.send(404))
 })
 
 router.get('/:id', (request, response) => {
@@ -21,7 +21,7 @@ router.get('/:id', (request, response) => {
                 console.log(result)
                 response.send(result)
             })
-    console.log(users)
+        .catch(response.send(404))
 })
 
 router.post('/', async (request, response) => {
@@ -31,7 +31,9 @@ router.post('/', async (request, response) => {
                 .then(result => {
                     response.send({ status: "New User has been added", result: result });
                 })
+                .catch(response.send(404))
         )
+        .catch(response.send("Invalid password"))
 
 })
 
@@ -47,7 +49,9 @@ router.put('/:id/change', async (request, response) => {
                         response.send({ status: "Password changed", result: result });
                     }
                 })
+                .catch(response.send(404))
         )
+        .catch(response.send("Invalid Password"))
 });
 
 router.put('/:id', (request, response) => {
@@ -58,8 +62,8 @@ router.put('/:id', (request, response) => {
             if (result.modifiedCount === 1) {
                 response.send({ status: "User has been updated", result: result });
             }
-
-        });
+        })
+        .catch(response.send(404))
 });
 
 router.delete('/:id', (request, response) => {
@@ -70,7 +74,8 @@ router.delete('/:id', (request, response) => {
                     status: "Users has been deleted"
                 });
             }
-        });
+        })
+        .catch(response.send(404))
 });
 
 module.exports = router;

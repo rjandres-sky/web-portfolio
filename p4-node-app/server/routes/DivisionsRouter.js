@@ -11,6 +11,7 @@ router.get('/', (request, response) => {
                 console.log(result)
                 response.send(result)
             })
+        .catch(response.send(404))
 })
 
 router.get('/:id', (request, response) => {
@@ -21,6 +22,7 @@ router.get('/:id', (request, response) => {
                 console.log(result)
                 response.send(result)
             })
+        .catch(response.send(404))
 })
 
 router.post('/', async (request, response) => {
@@ -28,6 +30,7 @@ router.post('/', async (request, response) => {
         .then(result => {
             response.send({ status: "New Division added", result: result })
         })
+        .catch(response.send(404))
 })
 
 router.put('/:id', (request, response) => {
@@ -38,18 +41,20 @@ router.put('/:id', (request, response) => {
             if (result.modifiedCount === 1) {
                 response.send({ status: "Division has been updated" });
             }
-        });
+        })
+        .catch(response.send(404))
 });
 
 router.delete('/:id', (request, response) => {
-    division.deleteOne({ _id: request.params.id })
+    Divisions.deleteOne({ _id: request.params.id })
         .then(result => {
             if (result.deletedCount === 1) {
                 response.send({
                     status: "Division has been deleted"
                 });
             }
-        });
+        })
+        .catch(response.send(404))
 });
 
 module.exports = router;

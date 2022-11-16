@@ -25,7 +25,8 @@ router.post('/', (request, response) => {
                 }
             });
         }
-    });
+    })
+    .catch(response.send(404))
 });
 
 

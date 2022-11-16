@@ -16,6 +16,7 @@ router.get('/', (request, response) => {
             result => {
                 response.send(result)
             })
+        .catch(response.send(404))
 })
 
 router.get('/:id', (request, response) => {
@@ -32,6 +33,7 @@ router.get('/:id', (request, response) => {
                 console.count
                 response.send(result)
             })
+        .catch(response.send(404))
 })
 
 router.post('/', (request, response) => {
@@ -39,6 +41,7 @@ router.post('/', (request, response) => {
         .then(result =>
             response.send({ status: "New Document added", result: result })
         )
+        .catch(response.send(404))
 })
 
 router.put('/:id', (request, response) => {
@@ -49,7 +52,8 @@ router.put('/:id', (request, response) => {
             if (result.modifiedCount === 1) {
                 response.send({ status: "Document has been updated" });
             }
-        });
+        })
+        .catch(response.send(404))
 });
 
 module.exports = router;

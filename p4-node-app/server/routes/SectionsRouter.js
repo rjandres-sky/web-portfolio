@@ -13,6 +13,7 @@ router.get('/', (request, response) => {
                 console.log(result)
                 response.send(result)
             })
+            .catch(response.send(404))
 })
 
 router.get('/:id', (request, response) => {
@@ -23,13 +24,15 @@ router.get('/:id', (request, response) => {
                 console.log(result)
                 response.send(result)
             })
+            .catch(response.send(404))
 })
 
 router.post('/', async (request, response) => {
     Sections.create(request.body)
         .then(result => {
             response.send({ status: "New Section added", result: result });
-        });
+        })
+        .catch(response.send(404))
 })
 
 router.put('/:id', (request, response) => {
@@ -38,7 +41,8 @@ router.put('/:id', (request, response) => {
         { $set: { ...request.body } })
         .then(result => {
             response.send({ status: "Post has been updated", result: result });
-        });
+        })
+        .catch(response.send(404))
 });
 
 module.exports = router;
