@@ -32,27 +32,5 @@ router.post('/', async (request, response) => {
     });
 })
 
-// router.put('/:id', (request, response) => {
-//     users.updateOne(
-//         { _id: request.params.id },
-//         { $set: { "sections.$.employees.$[emp]": request.body } })
-//         .then(result => {
-//             if (result.modifiedCount === 1) {
-//                 response.send({ status: "User has been updated", result: result });
-//             }
-
-//         });
-// });
-
-// router.delete('/:id', (request, response) => {
-//     users.deleteOne({ _id: request.params.id })
-//         .then(result => {
-//             if (result.deletedCount === 1) {
-//                 response.send({
-//                     status: "Comment has been deleted"
-//                 });
-//             }
-//         });
-// });
 
 module.exports = router;

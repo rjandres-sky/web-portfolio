@@ -6,9 +6,11 @@ const Documents = require('../models/DocumentsModel');
 router.get('/', (request, response) => {
     Documents.find()
         .populate({
-            path: 'document.requestedby', select : 'name position',
-                populate: { path: 'section', 
-                populate: { path: 'division', } }
+            path: 'document.requestedby', select: 'name position',
+            populate: {
+                path: 'section',
+                populate: { path: 'division', }
+            }
         })
         .then(
             result => {
@@ -18,11 +20,13 @@ router.get('/', (request, response) => {
 
 router.get('/:id', (request, response) => {
     Documents.find({ _id: request.params.id })
-    .populate({
-        path: 'document.requestedby', select : 'name position',
-            populate: { path: 'section', 
-            populate: { path: 'division', } }
-    })
+        .populate({
+            path: 'document.requestedby', select: 'name position',
+            populate: {
+                path: 'section',
+                populate: { path: 'division', }
+            }
+        })
         .then(
             result => {
                 console.count
@@ -37,15 +41,15 @@ router.post('/', (request, response) => {
         )
 })
 
-router.put('/:id', ( request, response ) => {
+router.put('/:id', (request, response) => {
     Documents.updateOne(
-        { _id: request.params.id }, 
-        { $set: request.body  })
-    .then( result => {
-        if( result.modifiedCount === 1 ){
-            response.send({ status: "Document has been updated" });
-        }
-    });
+        { _id: request.params.id },
+        { $set: request.body })
+        .then(result => {
+            if (result.modifiedCount === 1) {
+                response.send({ status: "Document has been updated" });
+            }
+        });
 });
 
 module.exports = router;
