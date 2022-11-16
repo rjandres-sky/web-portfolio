@@ -23,10 +23,10 @@ const Auth = () => {
                     })
         })  .then(res => res.json())
             .then(result => {
-                console.log(result.status)
+                console.log(result.result)
                 if(result.status === "Success" ) {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: { id: result.result._id,
-                     name: result.result.name, section: result.result, role: result.result.role } });
+                     name: result.result.name, section: result.result.section, role: result.result.role } });
                      setErrMsg('');
                 } else {
                     setErrMsg('Username and Password not found');

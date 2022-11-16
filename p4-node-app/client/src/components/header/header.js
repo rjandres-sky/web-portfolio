@@ -24,12 +24,12 @@ const Header = () => {
         }
     }
 
-    console.log( user[0].name.firstname )
+    console.log( user.name.firstname )
     return (
         <>
             <nav>
                 <h1> Document Tracking</h1>
-                { user[0].roletype === 'Administrator' &&
+                { user.role === 'administrator' &&
                     <>
                         <ul>
                             <li> | Division </li>
@@ -40,7 +40,7 @@ const Header = () => {
                     </>
                 }
                 <h4 className='user-welcome'>  
-                <span> Welcome : { user[0].name.firstname.toUpperCase() } </span>
+                <span> Welcome : { user.name.firstname.toUpperCase() } </span>
                 <div class="notification">
                     <img alt="notification" src="https://cdn-icons-png.flaticon.com/512/542/542740.png" onClick={handlerShowHide}/>
                     {   countNotification !== 0 &&
