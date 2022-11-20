@@ -1,32 +1,44 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-const divisions = require('../Models/modelDivisions')
+const Divisions = require('../Models/modelDivisions')
+const Sections = require('../Models/modelSections')
 
 router.get('/', (request, response) => {
-    divisions.find()
-        .populate('sections')
-        .then(result => request.send(result))
-        .catch(response.send(404))
+    Divisions.find()
+    .populate({path : 'sections', model : 'sections'})
+
+    .then(result => response.send(result))
 })
 
 router.get('/:id', (request, response) => {
-    divisions.findOne()
+    Divisions.findOne()
         .populate('sections')
-        .then(result => request.send(result))
+        .then(result => response.send(result))
         .catch(response.send(404))
 })
 
 router.post('/', async (request, response) => {
-    divisions.create(request.body)
-        .then(result => {
-            response.send({ status: "New Division added", result: result })
-        })
-        .catch(response.send(404))
-})
+    const division = new Divisions(request.body)
+    try {
+        await division.save()
+        response.status(204).send(division)
+    } catch(error) {
+        response.status(400).send(error)
+    }
+    
+    // Divisions.create(request.body)
+    //     .then(result => {
+    //         response.sendStatus(204)}
+    //     )
+    //     .catch(error => {
+    //         console.log(error)
+    //         response.sendStatus(400).send({error})
+    //     })
+}) 
 
 router.put('/:id', (request, response) => {
-    divisions.updateOne(
+    Divisions.updateOne(
         { _id: request.params.id },
         { $set: request.body })
         .then(result => {
@@ -38,7 +50,7 @@ router.put('/:id', (request, response) => {
 })
 
 router.delete('/:id', (request, response) => {
-    divisions.deleteOne({ _id: request.params.id })
+    Divisions.deleteOne({ _id: request.params.id })
         .then(result => {
             if (result.deletedCount === 1) {
                 response.send({
