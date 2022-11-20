@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="with-device-width, initial-scale=1.0">
+    <title>RJ ANDRES | PORTFOLIO</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9c8c55d23a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <section class="home" id="home">
+    <header class="header">
+      <nav>
+        <a href=""><img src="images/logo.png" alt="logo"></a>
+        <ul id="menu" onfocusout="hideme()">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Work Experience</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+            <i class="fa-sharp fa-solid fa-circle-xmark" onclick="closeMenu()"></i>
+        </ul>
+        <i class="fa-solid fa-ellipsis-vertical" onclick="openMenu()"></i>
+      </nav>
+  </header>
+  <div class="text">
+    <h1>Good <span>APPLICATION</span>, <br>like <span>WINE</span>, takes <span> TIME</span>.</h1>
+    <br>
+    <h1>Hi, My name is <span>RJ</span></h1>
+    <p>Aspiring Full Stack Developer</p>
+    <a href="#about">More About Me >></a>
+</div>
+  </section>
+    
+
+    <section class="about" id="about">
+      <div class="about-content">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/C-013.jpg" alt="my photo">
+            
+          </div>
+          <div class="about-col-2">
+              <h1>About Me</h1>
+              <p>
+                Bachelor of science in information technology graduate with a passion for developing scalable web application and working across full stack. Familiar with wide range of programming utilities and languages. Knowledgeable of backend and frontend development requirements. 
+              </p>
+          </div>
+        </div>
+      </div>
+    </section>
+      
+    <section class="skills" id="skills">
+      <div class="skill-content">
+        <h1>Skills</h1>
+        <p>Have an experience in :</p>
+        <div class="skill-types">
+          
+            <div class="skill-list">
+              <div >
+                <ul>
+                  <i class="fa-solid fa-window-restore"></i>
+                <h2>Frontend</h2>
+                  <li><i class="fa-brands fa-html5"></i> HTML</li>
+                  <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
+                  <li><i class="fa-brands fa-react"></i> React</li>
+                  <li><i class="fa-solid fa-window-restore"></i> Django</li>
+                  <li><i class="fa-solid fa-window-restore"></i> JQuery</li>
+                </ul>  
+              </div>
+            </div>
+
+           
+
+            <div class="skill-list">
+              <div>
+                <ul>
+                  <i class="fa-solid fa-laptop-code"></i>
+                  <h2>Backend</h2>
+                  <li><i class="fa-brands fa-square-js"></i> Javascript</li>
+                  <li><i class="fa-brands fa-php"></i> PHP</li>
+                  <li><i class="fa-brands fa-python"></i> Python</li>
+                  <li><i class="fa-brands fa-java"></i> Java</li>
+                  <li><i class="fa-solid fa-database"></i> MongoDB</li>
+                  <li><i class="fa-solid fa-database"></i> MySQL</li>
+                </ul> 
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <h1>Work experience</h1>
+        <div class="work-list">
+          <div class="work">
+            <img src="images/sysad.jpg" alt="System Administrator">
+            <div class="description">
+              <h2>System Administrator</h2>
+            <p>BFAR RO2 <br><br> 2013 to present</p>
+            </div>
+          </div>
+          <div class="work">
+            <img src="images/java-instructor.jpg" alt="Java Instructor">
+            <div class="description">
+              <h2>Partime Instructor</h2>
+              <p>
+                Java - Object Oriented Programming<br>
+                and Desktop Application Development<br><br>
+                Cagayan State University - Aparri <br>
+                2020-2021
+              </p>
+            </div>
+          </div>
+          <div class="work">
+            <img src="images/repair.jpg" alt="Computer Hardware Servicing">
+            <div class="description">
+              <h2>Insrtructor</h2>
+              <p>
+                Computer Hardware Servicing <br>
+                CENCES College, Inc. <br><br>
+                2011-2012
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-left">
+        <h1>Contact Me</h1>
+        <p><i class="fa-regular fa-paper-plane"></i> rjandres.sky@gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> 09063925560</p>
+        <div class="link-icons">
+          <a href="https://www.facebook.com/rjsandres94"><i class="fab fa-facebook"></i></a>
+          <a href=""><i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-brands fa-discord"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-right">
+          <form action="submit">
+              <input type="text" name="Name" placeholder="Enter your name">
+              <input type="email" name="email" placeholder="Enter your email">
+              <textarea name="Message" id="message" rows="6" placeholder="Enter your message"></textarea>
+              <input type="submit" class="btn" name="submit" value="Submit">
+          </form>
+      </div> 
+    </section>
+    <footer>
+          <div class="footer">
+            <p>&copy 2022 Rj Andres</p>
+            <p>Uplift CodeCamp</p>
+            <p>DICT</p>
+          </div>
+    </footer>
+
+    <script>
+      
+      sidemenu = document.getElementById("menu");
+      const mediaQuery = window.matchMedia('(max-width:600px)')
+      
+      function hideme(){
+        if (screen.width <= 600){
+          sidemenu.style.width = "0px";
+        } 
+        
+      }
+      function openMenu(){
+        sidemenu.style.width = "200px";
+      }
+      function closeMenu(){
+        sidemenu.style.width = "0px";
+      }
+    </script>
+</body>
+</html>
