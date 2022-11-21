@@ -5,7 +5,7 @@ import axios from 'axios';
 // START=================== Material UI ========================//
 import { DataGrid, GridToolbarContainer, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { createStyles, makeStyles } from "@mui/styles";
-import { Button, Link, Typography } from '@mui/material';
+import { Button, IconButton, Link, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit'
 //import PrintIcon from '@mui/icons-material/Print'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,6 +21,7 @@ import { Popper } from '@mui/material';
 
 // START=================== Component/s ========================//
 import AddModal from "./form";
+import DataTableSection from '../sections/list';
 // END===================== Component/s ========================//
 
 // START================ Material UI Style =======================//
@@ -175,7 +176,7 @@ renderCellExpand.propTypes = {
 
 // END======================== Expand Cell Value ===========================//
 
-const DataTable = () => {
+const DataTableDivision = () => {
 
   const classes = useStyles();
   const data = useSelector(state => state.dataDivisions.map(item => createData(item._id, item.division, item.div_description,
@@ -197,6 +198,7 @@ const DataTable = () => {
       field: "Edit",
       width: 70,
       headerAlign: 'center',
+      align: "center",
       renderCell: (cellValues) => {
         return (
           <Fab size='small' color='secondary'>
@@ -213,6 +215,7 @@ const DataTable = () => {
       field: "Delete",
       width: 70,
       headerAlign: 'center',
+      align: "center",
       renderCell: (cellValues) => {
         return (
           <Fab size='small' color='warning'>
@@ -229,32 +232,33 @@ const DataTable = () => {
       field: "id",
       headerAlign: 'center',
       headerName: "ID",
-      hideable: false
+      hideable: false,
     },
     {
       field: "division",
       headerAlign: 'center',
-
+      align: "center",
       headerName: "Divisions",
-      width: 100, renderCell: renderCellExpand
+      minWidth: 100, 
+      renderCell: renderCellExpand,
+      flex: 1,
     },
-    { field: "descriptions", headerName: "Descriptions", width: 200, headerAlign: 'center', renderCell: renderCellExpand },
+    { field: "descriptions", headerName: "Descriptions", width: 200, headerAlign: 'center', renderCell: renderCellExpand, flex: 1, },
     {
-      field: "sections", headerName: "Sections", width: 100, headerAlign: 'center', renderCell: renderCellExpand,
+      field: "sections", headerName: "Sections", width: 100, headerAlign: 'center', renderCell: renderCellExpand, flex: 1,
     },
     {
       field: "section_details",
       headerName: "Section Details",
+      align: "center",
+      width : 150,
       renderCell: (cellValues) => {
         return (
-
-          <DetailIcon
-            onClick={(event) => {
-              handleClick(event, cellValues);
-            }}
-          >
-            {cellValues}
-          </DetailIcon>
+          <IconButton onClick={(event) => {
+            handleShowSection(event, cellValues);
+          }}>
+          <DetailIcon />
+          </IconButton>
         )
       }
     }
@@ -350,17 +354,33 @@ const DataTable = () => {
 
         return (
           division.includes(val) || desc.includes(val) || section.includes(val)
-        // item.division.toLowerCase().includes(value.toLowerCase()) ||
-        // item.descriptions.toLowerCase().includes(value.toLowerCase()) ||
-        // item.section.toLowerCase().includes(value.toLowerCase())
         )
       }
       ))
     }
   }
   // END=================================== Search =======================================//
+
+  // START============================== Section Details =======================================//
+  const [showSection, setShowSection] = React.useState(false)
+  const handleShowSection = (event, cellValues) => {
+    setShowSection(!showSection)
+    setCurrent(cellValues)
+  }
+
+  const handleSectionClose = () => {
+    setShowSection(!showSection)
+    handleLoadDivisions()
+  }
+  // END================================ Section Details =======================================//
+
   return (
     <>
+      {showSection && <DataTableSection
+        current={current}
+        handleSectionClose = {handleSectionClose}
+      />}
+
       <AddModal handleAdd={handleAdd}
         addStatus={addStatus}
         emptyStatus={emptyStatus}
@@ -374,7 +394,7 @@ const DataTable = () => {
         <DataGrid
           rowHeight={50}
           className={classes.root}
-          rows={search=== true ? rows : data}
+          rows={search === true ? rows : data}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[5, 10, 25, 50, 100, 500, 1000]}
           columns={columns}
@@ -394,4 +414,4 @@ const DataTable = () => {
   )
 }
 
-export default DataTable;
+export default DataTableDivision;

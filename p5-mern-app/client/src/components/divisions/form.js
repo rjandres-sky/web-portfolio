@@ -85,8 +85,16 @@ export default function AddModal(props) {
     }
   })
 
+  const [searchValue, setSearchValue] = React.useState('')
   const handleSearch = (e) => {
-    props.handleSearch(e.target.value)
+    console.log(e.target.value)
+    if (e.target.value === undefined) {
+      setSearchValue('')
+      props.handleSearch('')
+    } else {
+      setSearchValue(e.target.value)
+      props.handleSearch(e.target.value)
+    }
   }
 
   return (
@@ -103,17 +111,28 @@ export default function AddModal(props) {
               <SearchIcon color="inherit" sx={{ display: 'block' }} />
             </Grid>
             <Grid item xs>
-              <TextField
+            <TextField
                 fullWidth
-                placeholder="Search by division or section"
+                placeholder="Search by section"
+
                 InputProps={{
                   disableUnderline: true,
                   sx: { fontSize: 'default' },
+                  endAdornment: searchValue && (
+                    <Tooltip title="Reload">
+                      <IconButton onClick={e => {
+                        handleSearch(e)
+                      }}>
+                        <RefreshIcon color="inherit" sx={{ display: 'block' }} />
+                      </IconButton>
+                    </Tooltip>
+                  )
                 }}
-                onChange={e => handleSearch(e)}
-                type="search"
-                variant="standard"
 
+                onChange={e => handleSearch(e)}
+                type="text"
+                variant="standard"
+                value={searchValue}
               />
             </Grid>
             <Grid item>
@@ -122,11 +141,6 @@ export default function AddModal(props) {
               >
                 Add Division
               </Button>
-              <Tooltip title="Reload">
-                <IconButton>
-                  <RefreshIcon color="inherit" sx={{ display: 'block' }} />
-                </IconButton>
-              </Tooltip>
             </Grid>
           </Grid>
         </Toolbar>
