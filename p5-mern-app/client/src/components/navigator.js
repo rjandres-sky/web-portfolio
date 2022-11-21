@@ -20,6 +20,7 @@ const categories = [
                 id: 'Users',
                 icon: <PeopleIcon />,
                 active: true,
+                
             },
             { id: 'Divisions', icon: <DivisionIcon /> },
             { id: 'Travel Orders', icon: <DocumentIcon /> },
@@ -58,7 +59,7 @@ export default function Navigator(props) {
                         </ListItem>
                         {children.map(({ id: childId, icon, active }) => (
                             <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item}>
+                                <ListItemButton selected={active} sx={item} href={childId.toLowerCase()}>
                                     <ListItemIcon>{icon}</ListItemIcon>
                                     <ListItemText>{childId}</ListItemText>
                                 </ListItemButton>
