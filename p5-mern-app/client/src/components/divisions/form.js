@@ -13,6 +13,9 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Stack from '@mui/material/Stack';
 
+import axios from 'axios'
+import { useDispatch } from 'react-redux';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -26,80 +29,161 @@ const style = {
 };
 
 export default function AddModal(props) {
-  const [open, setOpen] = React.useState(props.open);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
+  const [division, setDivision] = React.useState('')
+  const [description, setDescription] = React.useState('')
+  const [inputing, setInputing] = React.useState('')
+
+  const handleOpen = () => {
+    props.handleAdd('Cancel')
+  }
+
+  const handleCancel = () => {
+    if (props.action ==='Edit') {
+      props.handleEdit('Cancel')
+    } else if(props.action ==='Add'){
+      props.handleAdd('Cancel')
+    }
+  }
+
+  const handleSave = () => {
+    if (props.action === 'Edit') {
+      props.handleEdit(props.current.row.id, {
+        division: division,
+        div_description: description
+      })
+    } else if (props.action === 'Add'){
+      props.handleAdd({
+        division: division,
+        div_description: description
+      })
+    }
+  }
+
+  React.useEffect(() => {
+    if (props.addStatus === 204) {
+      setOpen(false);
+      props.emptyStatus()
+    }
+    if (props.action === 'Edit') {
+      if(!inputing) {     
+      setDivision(props.current.row.division)
+      setDescription(props.current.row.descriptions)
+      setOpen(true);
+      setInputing(true)
+    }
+    } else if (props.action === 'Add') {
+      if(!inputing){
+        setDivision('')
+      setDescription('')
+      setOpen(true);
+      setInputing(true)
+    }
+    } else {
+      setOpen(false);
+      setInputing(false)
+    }
+  })
+
+  const handleSearch = (e) => {
+    props.handleSearch(e.target.value)
+  }
 
   return (
-
     <>
+      <AppBar
+        position="static"
+        color="default"
+        elevation={0}
+        sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
+      >
+        <Toolbar>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <SearchIcon color="inherit" sx={{ display: 'block' }} />
+            </Grid>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                placeholder="Search by division or section"
+                InputProps={{
+                  disableUnderline: true,
+                  sx: { fontSize: 'default' },
+                }}
+                onChange={e => handleSearch(e)}
+                type="search"
+                variant="standard"
 
-<AppBar
-      position="static"
-      color="default"
-      elevation={0}
-      sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
-    >
-      <Toolbar>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <SearchIcon color="inherit" sx={{ display: 'block' } } />
+              />
+            </Grid>
+            <Grid item>
+              <Button variant="contained" sx={{ mr: 1 }}
+                onClick={handleOpen}
+              >
+                Add Division
+              </Button>
+              <Tooltip title="Reload">
+                <IconButton>
+                  <RefreshIcon color="inherit" sx={{ display: 'block' }} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
           </Grid>
-          <Grid item xs>
-            <TextField
-              fullWidth
-              placeholder="Search by division or section"
-              InputProps={{
-                disableUnderline: true,
-                sx: { fontSize: 'default' },
-              }}
-              type = "search"
-              variant="standard"
-              
-            />
-          </Grid>
-          <Grid item>
-            <Button variant="contained" sx={{ mr: 1 }}
-            onClick = {handleOpen}
-            >
-              Add Division
-            </Button>
-            <Tooltip title="Reload">
-              <IconButton>
-                <RefreshIcon color="inherit" sx={{ display: 'block' }} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
-      </Toolbar>
-      
+        </Toolbar>
+
       </AppBar>
 
-    <div>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style} >
-        <Typography id="modal-modal-title" variant="h6" component="h2" align='center'>
-          Add Division
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <TextField id="standard-basic" label="Division" variant='standard' fullWidth/>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <TextField id="standard-basic" label="Description" variant='standard' fullWidth />
-          </Typography>
+      <div>
+        <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <form onSubmit={e => e.preventDefault()}>
+            <Box sx={style} >
+              <Typography id="modal-modal-title" variant="h6" component="h2" align='center'>
+                {props.action + ' Division'}
+              </Typography>
+              <Stack spacing={2}>
 
-          <Stack direction="row" justifyContent={'center'} spacing={2} paddingTop="20px">
-          <Button variant="contained" size='small'> ADD </Button>
-          <Button variant="contained" bgcolor="alerts" size='small' onClick={handleClose}> CANCEL </Button>
-          </Stack>
+                <TextField
+                  id="standard-basic"
+                  label="Division"
+                  variant='standard'
+                  fullWidth
+                  value={division}
+                  
+                  onChange={e => {
+                    e.preventDefault()
+                    setDivision(e.target.value)
+                  }} />
+                <TextField
+                  id="standard-basic"
+                  label="Description"
+                  variant='standard' 
+                  fullWidth
+                  value={description}
+                  onChange={e => {
+                    e.preventDefault()
+                    setDescription(e.target.value)
+                  }} />
+              </Stack>
 
-        </Box>
-      </Modal>
-    </div>
+
+              <Stack direction="row" justifyContent={'center'} spacing={2} paddingTop="20px">
+                <Button variant="contained" size='small'
+                  onClick={e => {
+                    e.preventDefault()
+                    handleSave()
+                  }
+                  }> Save </Button>
+                <Button variant="contained" bgcolor="alerts" size='small' onClick={handleCancel}> CANCEL </Button>
+              </Stack>
+
+            </Box>
+          </form>
+        </Modal>
+      </div>
     </>
   );
 }

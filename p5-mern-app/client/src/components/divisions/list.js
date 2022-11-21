@@ -1,358 +1,397 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
+// START=================== Material UI ========================//
+import { DataGrid, GridToolbarContainer, GridToolbarDensitySelector } from '@mui/x-data-grid';
+import { createStyles, makeStyles } from "@mui/styles";
+import { Button, Link, Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit'
+//import PrintIcon from '@mui/icons-material/Print'
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
+//import PlusIcon from '@mui/icons-material/AddBox'
+//import PDFIcon from '@mui/icons-material/PictureAsPdf'
+import DetailIcon from '@mui/icons-material/ReadMore'
+import Fab from '@mui/material/Fab';
+import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { Popper } from '@mui/material';
+// END=================== Material UI =========================//
 
-import AddModal from './form';
+// START=================== Component/s ========================//
+import AddModal from "./form";
+// END===================== Component/s ========================//
 
-function createData(division, descriptions, sections) {
+// START================ Material UI Style =======================//
+const useStyles = makeStyles((theme) => //Data grid style
+  createStyles({
+    root: {}
+  })
+);
+// END================= Material UI Style =======================//
+
+const handleClick = (event, cellValues) => {
+  console.log(cellValues.row);
+};
+
+const handleCellClick = (param, event) => {
+  event.stopPropagation();
+};
+
+const handleRowClick = (param, event) => {
+  event.stopPropagation();
+};
+
+function createData(id, division, descriptions, sections) {
   return {
+    id,
     division,
     descriptions,
-    sections,
+    sections
   };
 }
 
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-];
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
-  {
-    id: 'division',
-    numeric: false,
-    disablePadding: true,
-    label: 'Divisions',
-  },
-  {
-    id: 'descriptions',
-    numeric: false,
-    disablePadding: false,
-    label: 'Descriptions',
-  },
-  {
-    id: 'sections',
-    numeric: false,
-    disablePadding: false,
-    label: 'Sections',
-  }
-];
-
-function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+function CustomToolbar() { //row density
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all',
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={headCell.id === 'division' &&  orderBy === headCell.id ? order : false}
-          >
-             
-              <TableSortLabel
-              active={ headCell.id === 'division'  && orderBy === headCell.id}
-              direction={headCell.id === 'division' &&  orderBy === headCell.id ? order : 'asc'}
-              onClick={headCell.id === 'division' && createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {headCell.id === 'division' && orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
+    <GridToolbarContainer>
+      <GridToolbarDensitySelector />
+    </GridToolbarContainer>
   );
 }
 
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+// START====================== Expand Cell Value ===========================//
+function isOverflown(element) {
   return (
-    <>
-      <AddModal />
+    element.scrollHeight > element.clientHeight ||
+    element.scrollWidth > element.clientWidth
+  );
+}
 
-      <Toolbar
+const GridCellExpand = React.memo(function GridCellExpand(props) {
+  const { width, value } = props;
+  const wrapper = React.useRef(null);
+  const cellDiv = React.useRef(null);
+  const cellValue = React.useRef(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showFullCell, setShowFullCell] = React.useState(false);
+  const [showPopper, setShowPopper] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    const isCurrentlyOverflown = isOverflown(cellValue.current);
+    setShowPopper(isCurrentlyOverflown);
+    setAnchorEl(cellDiv.current);
+    setShowFullCell(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowFullCell(false);
+  };
+
+  React.useEffect(() => {
+    if (!showFullCell) {
+      return undefined;
+    }
+
+    function handleKeyDown(nativeEvent) {
+      // IE11, Edge (prior to using Bink?) use 'Esc'
+      if (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc') {
+        setShowFullCell(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [setShowFullCell, showFullCell]);
+
+  return (
+    <Box
+      ref={wrapper}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      sx={{
+        alignItems: 'center',
+        lineHeight: '24px',
+        width: 1,
+        height: 1,
+        position: 'relative',
+        display: 'flex',
+      }}
+    >
+      <Box
+        ref={cellDiv}
         sx={{
-          pl: { sm: 2 },
-          pr: { xs: 1, sm: 1 },
-          ...(numSelected > 0 && {
-            bgcolor: (theme) =>
-              alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-          }),
+          height: 1,
+          width,
+          display: 'block',
+          position: 'absolute',
+          top: 0,
         }}
-      >
-        {numSelected > 0 ? (
-          <Typography
-            sx={{ flex: '1 1 100%' }}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
-          >
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography
-            sx={{ flex: '1 1 100%' }}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
-            Divisions
-          </Typography>
-        )}
-
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton>
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-      </Toolbar>
-    </>
-  );
-}
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
-export default function EnhancedTable() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.division);//check all
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name); // check one
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.division); //change name
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.division)} // change name
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.division} //change name
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.division}
-                      </TableCell>
-
-                      <TableCell align="right">{row.descriptions}</TableCell>
-                      <TableCell align="right">{row.sections}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
       />
+      <Box
+        ref={cellValue}
+        sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+      >
+        {value}
+      </Box>
+      {showPopper && (
+        <Popper
+          open={showFullCell && anchorEl !== null}
+          anchorEl={anchorEl}
+          style={{ width, marginLeft: 'offsetHeight' }}
+        >
+          <Paper
+            elevation={1}
+            style={{ minHeight: wrapper.current.offsetHeight - 3 }}
+          >
+            <Typography variant="body2" style={{ padding: 8 }}>
+              {value}
+            </Typography>
+          </Paper>
+        </Popper>
+      )}
     </Box>
   );
+});
+
+GridCellExpand.propTypes = {
+  value: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+};
+
+function renderCellExpand(params) {
+  return (
+    <GridCellExpand value={params.value || ''} width={params.colDef.computedWidth} />
+  );
 }
+
+renderCellExpand.propTypes = {
+  colDef: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+};
+
+// END======================== Expand Cell Value ===========================//
+
+const DataTable = () => {
+
+  const classes = useStyles();
+  const data = useSelector(state => state.dataDivisions.map(item => createData(item._id, item.division, item.div_description,
+    item.sections.map(section => section.section).join(', '))
+  ))
+
+  const [addStatus, setAddStatus] = React.useState()
+  const [pageSize, setPageSize] = React.useState(5);
+  const [action, setAction] = React.useState('')
+  const [current, setCurrent] = React.useState({})
+  const [rows, setRows] = React.useState([])
+  const [search, setSearch] = React.useState(false)
+
+  const dispatch = new useDispatch()
+
+  // START============================= Columns Setting =================================//
+  const columns = [
+    {
+      field: "Edit",
+      width: 70,
+      headerAlign: 'center',
+      renderCell: (cellValues) => {
+        return (
+          <Fab size='small' color='secondary'>
+            <EditIcon
+              onClick={(event) => {
+                handleEdit(event, cellValues);
+              }}
+            />
+          </Fab>
+        )
+      }
+    },
+    {
+      field: "Delete",
+      width: 70,
+      headerAlign: 'center',
+      renderCell: (cellValues) => {
+        return (
+          <Fab size='small' color='warning'>
+            <DeleteIcon
+              onClick={(event) => {
+                if (window.confirm('Are you sure you want to delete ' + cellValues.row.division)) { handleDelete(event, cellValues) };
+              }}
+            />
+          </Fab>
+        );
+      }
+    },
+    {
+      field: "id",
+      headerAlign: 'center',
+      headerName: "ID",
+      hideable: false
+    },
+    {
+      field: "division",
+      headerAlign: 'center',
+
+      headerName: "Divisions",
+      width: 100, renderCell: renderCellExpand
+    },
+    { field: "descriptions", headerName: "Descriptions", width: 200, headerAlign: 'center', renderCell: renderCellExpand },
+    {
+      field: "sections", headerName: "Sections", width: 100, headerAlign: 'center', renderCell: renderCellExpand,
+    },
+    {
+      field: "section_details",
+      headerName: "Section Details",
+      renderCell: (cellValues) => {
+        return (
+
+          <DetailIcon
+            onClick={(event) => {
+              handleClick(event, cellValues);
+            }}
+          >
+            {cellValues}
+          </DetailIcon>
+        )
+      }
+    }
+  ];
+  // END=============================== Columns Setting =================================//
+
+  // START================================== CRUD =======================================//
+  const handleLoadDivisions = () => { //load all data
+    axios.get('http://localhost:8080/divisions/')
+      .then(result => {
+        dispatch({ type: 'LOAD_DIVISIONS', payload: result.data })
+      })
+      .catch(console.log())
+  }
+
+  React.useEffect(() => {
+    handleLoadDivisions()
+  }, [])
+
+  const handleAdd = (newItem) => { //add new division
+    if (action === '') {
+      setAction('Add')
+    } else if (action === 'Add' && newItem !== 'Cancel') {
+      axios.post('http://localhost:8080/divisions/', newItem)
+        .then(() => {
+          alert('New divisions has been added')
+          setAddStatus(204)
+          handleLoadDivisions()
+          setAction('')
+        })
+        .catch(error => {
+          alert(error.response.data.errors.division.message)
+          setAddStatus(400)
+        })
+    } else {
+      setAction('')
+    }
+  }
+
+  const handleEdit = (event, cellValues) => {
+    if (action === 'Edit' && event !== 'Cancel') {
+      axios.put(`http://localhost:8080/divisions/${event}`, cellValues)
+        .then(() => {
+          alert('Divisions has been updated')
+          setAddStatus(204)
+          handleLoadDivisions()
+          setAction('')
+        })
+        .catch(error => {
+          alert(error.response.data.errors.division.message)
+          setAddStatus(400)
+        })
+      setAction('')
+
+    } else if (action === '') {
+      setAction('Edit')
+      setCurrent(cellValues)
+    } else {
+      setAction('')
+    }
+  };
+
+  const handleDelete = (event, cellValue) => {
+    axios.delete(`http://localhost:8080/divisions/${cellValue.row.id}`)
+      .then(() => {
+        alert('Divisions has been deleted')
+        setAddStatus(204)
+        handleLoadDivisions()
+        setAction('')
+      })
+      .catch(error => {
+        alert(error.response.data.errors.division.message)
+        setAddStatus(400)
+      })
+  }
+
+  const emptyStatus = () => {
+    setAddStatus()
+  }
+  // END==================================== CRUD =======================================//
+
+  // START================================= Search =======================================//
+  const handleSearch = (value) => {
+    if (value === '') {
+      setSearch(false)
+    } else {
+      setSearch(true)
+      setRows(data.filter(item => {
+        let division = item.division.toLowerCase()
+        let desc = item.descriptions.toLowerCase()
+        let section = item.sections.toLowerCase()
+        let val = value.toLowerCase()
+
+        return (
+          division.includes(val) || desc.includes(val) || section.includes(val)
+        // item.division.toLowerCase().includes(value.toLowerCase()) ||
+        // item.descriptions.toLowerCase().includes(value.toLowerCase()) ||
+        // item.section.toLowerCase().includes(value.toLowerCase())
+        )
+      }
+      ))
+    }
+  }
+  // END=================================== Search =======================================//
+  return (
+    <>
+      <AddModal handleAdd={handleAdd}
+        addStatus={addStatus}
+        emptyStatus={emptyStatus}
+        current={current}
+        handleEdit={handleEdit}
+        action={action}
+        handleSearch={handleSearch}
+      />
+
+      <div style={{ height: 500, width: "100%" }}>
+        <DataGrid
+          rowHeight={50}
+          className={classes.root}
+          rows={search=== true ? rows : data}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[5, 10, 25, 50, 100, 500, 1000]}
+          columns={columns}
+          pageSize={pageSize}
+          onCellClick={handleCellClick}
+          onRowClick={handleRowClick}
+          disableColumnMenu={true}
+          columnVisibilityModel={{ id: false }}
+          density="comfortable"
+          components={{
+            Toolbar: CustomToolbar,
+          }}
+
+        />
+      </div>
+    </>
+  )
+}
+
+export default DataTable;

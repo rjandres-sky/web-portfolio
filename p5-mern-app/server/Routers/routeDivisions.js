@@ -26,15 +26,6 @@ router.post('/', async (request, response) => {
     } catch(error) {
         response.status(400).send(error)
     }
-    
-    // Divisions.create(request.body)
-    //     .then(result => {
-    //         response.sendStatus(204)}
-    //     )
-    //     .catch(error => {
-    //         console.log(error)
-    //         response.sendStatus(400).send({error})
-    //     })
 }) 
 
 router.put('/:id', (request, response) => {
@@ -43,22 +34,20 @@ router.put('/:id', (request, response) => {
         { $set: request.body })
         .then(result => {
             if (result.modifiedCount === 1) {
-                response.send({ status: "Division has been updated" });
+                response.status(204).send(result);
             }
         })
-        .catch(response.send(404))
+        .catch(error => response.status(404).send(error))
 })
 
 router.delete('/:id', (request, response) => {
     Divisions.deleteOne({ _id: request.params.id })
         .then(result => {
             if (result.deletedCount === 1) {
-                response.send({
-                    status: "Division has been deleted"
-                });
+                response.status(204).send(result);
             }
         })
-        .catch(response.send(404))
+        .catch(error => response.status(404).send(error))
 });
 
 module.exports = router
