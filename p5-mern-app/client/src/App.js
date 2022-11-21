@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -173,37 +174,39 @@ export default function Paperbase() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-        <CssBaseline />
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
-          {isSmUp ? null : (
+    
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+          <CssBaseline />
+          <Box
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          >
+            {isSmUp ? null : (
+              <Navigator
+                PaperProps={{ style: { width: drawerWidth } }}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+              />
+            )}
+
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
+              sx={{ display: { sm: 'block', xs: 'none' } }}
             />
-          )}
-
-          <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
-            sx={{ display: { sm: 'block', xs: 'none' } }}
-          />
-        </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
-          <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-            <Content />
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-            <Copyright />
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <Header onDrawerToggle={handleDrawerToggle} />
+            <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
+              <Content />
+            </Box>
+            <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
+              <Copyright />
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </ThemeProvider>
+      </ThemeProvider>
+    
   );
 }
