@@ -16,7 +16,7 @@ server.use(helmet());
 // import routers
 // const UsersRouter = require('./routes/UsersRouter');
 const DivisionsRouter = require('./routers/routeDivisions');
-// const SectionsRouter = require('./routes/SectionsRouter');
+ const SectionsRouter = require('./routers/routeSections');
 // const AuthRouter = require('./routes/Auth');
 // const DocumentsRouter = require('./routes/DocumentsRouter');
 // const ActionsRouter = require('./routes/ActionsRouter');
@@ -29,7 +29,7 @@ server.get('/', (request, response) => {
 
 // server.use('/users', UsersRouter); //users router
 server.use('/divisions', DivisionsRouter); //divisions router
-// server.use('/sections', SectionsRouter); // sections router
+server.use('/sections', SectionsRouter); // sections router
 // server.use('/auth', AuthRouter) //login router
 // server.use('/documents', DocumentsRouter) //documents router
 // server.use('/actions', ActionsRouter)
