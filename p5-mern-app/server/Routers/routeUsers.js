@@ -7,8 +7,8 @@ const Users = require('../Models/modelUsers')
 router.get('/', (request, response) => {
     Users.find()
         .select({ password: 0 })
-        .populate({ path: 'division', select : {sections : 0}})
-        .populate({ path: 'section', select : {division : 0}})
+        .populate({ path: 'division', select: { sections: 0 } })
+        .populate({ path: 'section', select: { division: 0 } })
         .then(result => response.send(result))
 })
 

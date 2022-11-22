@@ -17,9 +17,9 @@ server.use(helmet());
 const UsersRouter = require('./Routers/routeUsers');
 const DivisionsRouter = require('./Routers/routeDivisions');
 const SectionsRouter = require('./Routers/routeSections');
-// const AuthRouter = require('./routes/Auth');
-// const DocumentsRouter = require('./routes/DocumentsRouter');
-// const ActionsRouter = require('./routes/ActionsRouter');
+const AuthRouter = require('./Routers/routeAuth');
+// const DocumentsRouter = require('./Routes/DocumentsRouter');
+// const ActionsRouter = require('./Routes/ActionsRouter');
 
 mongoose.connect('mongodb://localhost:27017/travelorder', { useNewUrlParser: true });
 
@@ -30,7 +30,7 @@ server.get('/', (request, response) => {
 server.use('/users', UsersRouter); //users router
 server.use('/divisions', DivisionsRouter); //divisions router
 server.use('/sections', SectionsRouter); // sections router
-// server.use('/auth', AuthRouter) //login router
+server.use('/auth', AuthRouter) //login router
 // server.use('/documents', DocumentsRouter) //documents router
 // server.use('/actions', ActionsRouter)
 
