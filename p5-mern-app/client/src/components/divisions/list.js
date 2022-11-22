@@ -5,7 +5,7 @@ import axios from 'axios';
 // START=================== Material UI ========================//
 import { DataGrid, GridToolbarContainer, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { createStyles, makeStyles } from "@mui/styles";
-import { Button, IconButton, Link, Typography } from '@mui/material';
+import { Button, Grid, IconButton, Link, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit'
 //import PrintIcon from '@mui/icons-material/Print'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -22,6 +22,7 @@ import { Popper } from '@mui/material';
 // START=================== Component/s ========================//
 import AddModal from "./form";
 import DataTableSection from '../sections/list';
+import { getValue, height } from '@mui/system';
 // END===================== Component/s ========================//
 
 // START================ Material UI Style =======================//
@@ -235,30 +236,71 @@ const DataTableDivision = () => {
       hideable: false,
     },
     {
-      field: "division",
+      field: "divisions",
       headerAlign: 'center',
       align: "center",
       headerName: "Divisions",
       minWidth: 100, 
       renderCell: renderCellExpand,
       flex: 1,
+      renderCell : (cellValues) => {
+        return (
+          <Grid>
+            <Typography>
+            { cellValues.row.division}
+            </Typography>
+          </Grid>
+        )
+      },
+
+      
     },
-    { field: "descriptions", headerName: "Descriptions", width: 200, headerAlign: 'center', renderCell: renderCellExpand, flex: 1, },
-    {
-      field: "sections", headerName: "Sections", width: 100, headerAlign: 'center', renderCell: renderCellExpand, flex: 1,
+    { 
+      field: "descriptions", 
+      headerName: "Descriptions", 
+      headerAlign: 'center',
+      allowTextWrap : true,
+      flex: 1,
+      renderCell: renderCellExpand,
+      //, 
+      // renderCell : (cellValues) => {
+      //   return (
+         
+      //     // <div style={{overflow:'hidden', wrap:'no-wrap'}}>
+      //     //   <Typography style={{overFlowWrap: 'break-word'}}>
+      //     //   { cellValues.row.descriptions} hjsadflsadjkl jhlskjahdlkjshakld lksakl lkhlks akhjljlkjh jhlhlkhkllk 
+      //     //   </Typography>
+      //     // </div>
+      //     <Grid item zeroMinWidth >
+      //       <Typography style={{overflowWrap: 'break-word', allowTextWrap : true}}>
+      //       { cellValues.row.descriptions} hjsadflsadjkl jhlskjahdlkjshakld lksakl lkhlks akhjljlkjh jhlhlkhkllk 
+      //       </Typography> 
+      //     </Grid>
+      //   )
+      //},
     },
+    // {
+    //   field: "sections", headerName: "Sections", width: 100, headerAlign: 'center', renderCell: renderCellExpand, flex: 1,
+    // },
     {
       field: "section_details",
-      headerName: "Section Details",
-      align: "center",
-      width : 150,
+      headerName: "Sections",
+      headerAlign : 'center',
+      align: "left",
+      renderCell: renderCellExpand,
+      flex : 1,
       renderCell: (cellValues) => {
         return (
+          
+          <Grid>
           <IconButton onClick={(event) => {
             handleShowSection(event, cellValues);
           }}>
           <DetailIcon />
           </IconButton>
+          {cellValues.row.sections}
+          </Grid>
+          
         )
       }
     }
@@ -398,6 +440,7 @@ const DataTableDivision = () => {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[5, 10, 25, 50, 100, 500, 1000]}
           columns={columns}
+          allowTextWrap={true}
           pageSize={pageSize}
           onCellClick={handleCellClick}
           onRowClick={handleRowClick}
