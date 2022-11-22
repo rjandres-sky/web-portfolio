@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sungka Game Board | Project 2</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="msg-content">
+			<h1>Click "START GAME" to begin</h1>
+		</div>
+		<div class="popup">
+			<img src="assets/images/huggy-win-turn.png" alt="huggy wuggy and kissy missy image">
+			<p>Message</p>
+			<input type="button" class="btn-hide" value="Close">
+		</div>
+        
+        <div class="instruction">
+              <img src="assets/images/sunka-board.jpg" />  
+          <h1>Instruction</h1>
+          
+            <li>Each player has 49 game pieces equally distributed to each holes - except the head which remain empty.</li>
+          
+            <li>For the first turn, a player may decide which of the seven holes wishes to begin with.</li>
+          
+            <li>The last piece will dictate whether to continue the turn.</li> 
+          
+            <li>If landed to home/head, pick another holes to begin.</li>
+          
+            <li>If landed to not empty hole, all piece will pick and continue to distribute.</li>
+          
+            <li>If landed to an empty hole, current player turns end.</li>
+          
+            <li>The game ends when 1 player has a score above 49.</li>
+            
+            <input type="button" class="btn-hide-instruction" value="Close">
+        </div>
+        
+    </header>
+    <main>
+        <div class="btn-start">
+            <a href="#" class="start-button">START GAME </a>
+            <a href="#" class="instruction-button"> INSTRUCTION </a>
+        </div>
+        <div class="players-container">
+            <div class="sunka-board">
+                <div class="home player-2">
+                </div>
+                <div class="backyard main">
+                    <div class="backyard player-two">
+                        <div class="holes player-2 hole-7"></div>
+                        <div class="holes player-2 hole-6"></div>
+                        <div class="holes player-2 hole-5"></div>
+                        <div class="holes player-2 hole-4"></div>
+                        <div class="holes player-2 hole-3"></div>
+                        <div class="holes player-2 hole-2"></div>
+                        <div class="holes player-2 hole-1"></div>
+                    </div>
+                    <div class="backyard player-one">
+                        <div class="holes player-1 hole-1"></div>
+                        <div class="holes player-1 hole-2"></div>
+                        <div class="holes player-1 hole-3"></div>
+                        <div class="holes player-1 hole-4"></div>
+                        <div class="holes player-1 hole-5"></div>
+                        <div class="holes player-1 hole-6"></div>
+                        <div class="holes player-1 hole-7"></div>
+                    </div>
+                </div>
+                <div class="home player-1">
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>
