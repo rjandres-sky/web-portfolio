@@ -7,11 +7,11 @@ const UsersSchema = new Schema ({
     name : {
         lastname : { type : String, require: true},
         firstname : { type : String, require: true},
-        middlename :  String,
-        extension :  String
+        middlename : { type : String},
+        extension :  { type : String},
     },
     position : { type : String, require: true},
-    username : { type : String, require: true},
+    username : { type : String, require: true, unique : true},
     password : { type : String, require: true},
     division : { type : Schema.Types.ObjectId, ref : 'divisions', require: true},
     section : { type : Schema.Types.ObjectId, ref : 'sections', require: true},
