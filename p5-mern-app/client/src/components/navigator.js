@@ -11,6 +11,8 @@ import DocumentIcon from '@mui/icons-material/TravelExplore'
 import DivisionIcon from '@mui/icons-material/SafetyDivider'
 
 import PeopleIcon from '@mui/icons-material/People';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const categories = [
     {
@@ -18,12 +20,11 @@ const categories = [
         children: [
             {
                 id: 'Users',
-                icon: <PeopleIcon />,
-                active: true,
-                
+                icon: <PeopleIcon />
             },
             { id: 'Divisions', icon: <DivisionIcon /> },
-            { id: 'Travel Orders', icon: <DocumentIcon /> },
+            { id: 'Travel Orders', icon: <DocumentIcon />
+             },
         ],
     }
 ];
@@ -45,6 +46,12 @@ const itemCategory = {
 
 export default function Navigator(props) {
     const { ...other } = props;
+    const dispatch = new useDispatch();
+
+    const handlePage = (page) => {
+        dispatch({type : 'CURRENTPAGE', payload : page})
+        console.log(page)
+    }
 
     return (
         <Drawer variant="permanent" {...other}>
@@ -58,8 +65,9 @@ export default function Navigator(props) {
                             <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
                         </ListItem>
                         {children.map(({ id: childId, icon, active }) => (
-                            <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item} href={childId.toLowerCase()}>
+                            <ListItem disablePadding key={childId} >
+                                <ListItemButton selected={active} sx={item} onClick={e => {e.preventDefault() 
+                                handlePage(childId.toLowerCase())}}>
                                     <ListItemIcon>{icon}</ListItemIcon>
                                     <ListItemText>{childId}</ListItemText>
                                 </ListItemButton>
