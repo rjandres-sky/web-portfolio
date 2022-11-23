@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import Navigator from './components/navigator';
 import Content from './components/content';
 import Header from './components/header';
+import Auth from './components/auth/login/Auth';
+import { useSelector } from 'react-redux';
 
 function Copyright() {
   return (
@@ -165,48 +167,67 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function Paperbase() {
+export default function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const currentUser = useSelector(state => state.dataCurrentUser)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleUser = (val) => {
+    //setCurrentUser([val])
+  }
+  React.useEffect(() => {
+    console.log(currentUser)
+  })
+
+
   return (
-    
-      <ThemeProvider theme={theme}>
-        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-          <CssBaseline />
-          <Box
-            component="nav"
-            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          >
-            {isSmUp ? null : (
+    <>
+
+      {currentUser.length === 0 && <Auth handleUser={handleUser} />}
+
+      {currentUser.length > 0 &&
+        <ThemeProvider theme={theme}>
+          <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+            <CssBaseline />
+            <Box
+              component="nav"
+              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            >
+              {isSmUp ? null : (
+                <Navigator
+                  PaperProps={{ style: { width: drawerWidth } }}
+                  variant="temporary"
+                  open={mobileOpen}
+                  onClose={handleDrawerToggle}
+                />
+              )}
+
               <Navigator
                 PaperProps={{ style: { width: drawerWidth } }}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
+                sx={{ display: { sm: 'block', xs: 'none' } }}
               />
-            )}
+            </Box>
+            <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <Header onDrawerToggle={handleDrawerToggle} />
+              <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
+                <Content />
+              </Box>
+              <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
+                <Copyright />
+              </Box>
+            </Box>
+          </Box>
+        </ThemeProvider>
 
-            <Navigator
-              PaperProps={{ style: { width: drawerWidth } }}
-              sx={{ display: { sm: 'block', xs: 'none' } }}
-            />
-          </Box>
-          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-            <Header onDrawerToggle={handleDrawerToggle} />
-            <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-              <Content />
-            </Box>
-            <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-              <Copyright />
-            </Box>
-          </Box>
-        </Box>
-      </ThemeProvider>
-    
+      }
+
+
+
+
+    </>
   );
 }

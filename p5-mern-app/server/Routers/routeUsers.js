@@ -48,10 +48,10 @@ router.put('/:id', (request, response) => {
         { $set: { ...request.body } })
         .then(result => {
             if (result.modifiedCount === 1) {
-                response.status(204).send({ status: "User has been updated" });
+                response.status(204).send(result);
             }
         })
-        .catch(response.status(400).send(404))
+        .catch(error => response.status(400).send(error))
 });
 
 router.delete('/:id', (request, response) => {

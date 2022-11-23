@@ -9,6 +9,11 @@ router.get('/:id', (request, response) => {
     .then(result => response.send(result))
 })
 
+router.get('/', (request, response) => {
+    Sections.find()
+    .then(result => response.send(result))
+})
+
 router.post('/', async (request, response) => {
     const section = new Sections(request.body)
     await section.save()
