@@ -15,17 +15,15 @@ router.post('/', (request, response) => {
                         .select({password : 0})
                         .populate({ path: 'division', select: { sections: 0 } })
                         .populate({ path: 'section', select: { division: 0 } })
-                        .then(result => response.status(200).send(result))
+                        .then(result => {
+                            response.status(200).send(result)})
                     } else {
-                        response.status(400).send('Invalid Username or Password2')
+                        response.status(400).send("Invalid Username or Password")
                     }
                 });
             }
         })
-        .catch(error => response.status(400).send('Invalid Username or Password'))
+        .catch(error => response.status(400).send("Invalid Username or Password"))
 });
 
-
 module.exports = router;
-
-
