@@ -1,10 +1,13 @@
 import {combineReducers} from 'redux'
 
-import { reducerDivisions, reducerSections, reducerUsers } from "./reducers";
+import { loadPage, reducerAuth, reducerDivisions, reducerSections, reducerTravelOrders, reducerUsers } from "./reducers";
 
 const allReducers = combineReducers({
     dataDivisions : reducerDivisions,
     dataSections : reducerSections,
-    dataUsers : reducerUsers
+    dataUsers : reducerUsers,
+    dataTravelOrders : reducerTravelOrders,
+    dataCurrentUser : reducerAuth,
+    Page : loadPage
 })
 export default allReducers;
