@@ -7,6 +7,8 @@
   <title>RJ ANDRES | PORTFOLIO</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/9c8c55d23a.js" crossorigin="anonymous"></script>
+  <script
+    src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
 </head>
 
 <body>
@@ -14,15 +16,17 @@
     <header class="header">
       <nav>
         <a href=""><img src="images/logo.png" alt="logo"></a>
+        
         <ul id="menu" onfocusout="hideme()">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Me</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Work Experience</a></li>
+          <!-- <li><a href="#experience">Work Experience</a></li> -->
           <li><a href="#contact">Contact Me</a></li>
           <i class="fa-sharp fa-solid fa-circle-xmark" onclick="closeMenu()"></i>
         </ul>
+        
         <i class="fa-solid fa-ellipsis-vertical" onclick="openMenu()"></i>
       </nav>
     </header>
@@ -30,7 +34,7 @@
       <h1>Good <span>APPLICATION</span>, <br>like <span>WINE</span>, takes <span> TIME</span>.</h1>
       <br>
       <h1>Hi, My name is <span>RJ</span></h1>
-      <p>Aspiring Full Stack Developer</p>
+      <p>Full Stack Developer</p>
       <a href="#about">More About Me >></a>
     </div>
   </section>
@@ -101,90 +105,74 @@
       <div class="project">
         <img src="./images/portfolio.jpg" alt="Portfolio">
         <div class="description">
-          <a href="https://rjandres-sky.github.io/projects/001-web-portfolio/" target="_blank"><h2>Portfolio</h2></a>
+          <a href="https://rjandres-sky.github.io/projects/001-web-portfolio/" target="_blank">
+            <h2>Portfolio</h2>
+          </a>
           <p>using HTML and CSS</p>
         </div>
       </div>
       <div class="project">
         <img src="./images/sungka.jpg" alt="Sungka Game">
         <div class="description">
-          <a href="https://rjandres-sky.github.io/projects/p2-js-game/" target="_blank"><h2>Sungka</h2></a>
+          <a href="https://rjandres-sky.github.io/projects/p2-js-game/" target="_blank">
+            <h2>Sungka</h2>
+          </a>
           <p>
             using HTML, CSS, and Java Script
+            <br/> Sungka, pronounced as Soong-kah, is a two-player turn-based board game wherein the players compete to obtain more stones than the other.
           </p>
-          
+
         </div>
       </div>
       <div class="project">
-        <img src="" alt="Document Tracking">
+        <img src="./images/dts.jpg" alt="Document Tracking">
         <div class="description">
-          <h2>Document Tracking</h2>
+          <a href="https://github.com/rjandres-sky/projects/tree/p3-react-app" target="_blank">
+            <h2>Document Tracking</h2>
+          </a>
           <p>
             using React JS
+            <br /> Document Tracking is for BFAR RO2 empployee to track their documents
+
           </p>
         </div>
       </div>
 
       <div class="project">
-        <img src="" alt="Document Tracking">
+        <img src="./images/dts.jpg" alt="Document Tracking">
         <div class="description">
-          <h2>Document Tracking</h2>
+          <a href="https://github.com/rjandres-sky/projects/tree/p4-node-app" target="_blank">
+            <h2>Document Tracking</h2>
+          </a>
           <p>
-            using React JS, MongoDB, Express JS
+            using React JS, MongoDB, Express JS.
+            <br /> Document Tracking is for BFAR RO2 empployee to track their documents
           </p>
         </div>
       </div>
       <div class="project">
-        <img src="" alt="Travel Order">
+        <img src="./images/travelOrder.jpg" alt="Travel Order">
         <div class="description">
-          <h2>Travel Order System</h2>
+          <a href="https://github.com/rjandres-sky/projects/tree/p5-mern-app" target="_blank">
+            <h2>Travel Order System</h2>
+          </a>
           <p>
-            using React JS, MongoDB, Express JS
-          </p>
-        </div>
-      </div>
-      <div class="project">
-        <img src="" alt="Petly">
-        <div class="description">
-          <h2>Petly</h2>
-          <p>
-            using React JS, MongoDB, Express JS
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+            using React JS, Material UI, MongoDB, Express JS.
+            <br />
+            Manage Travel Orders of employees.
 
-  <section class="experience" id="experience">
-    <h1>Work experience</h1>
-    <div class="work-list">
-      <div class="work">
-        <img src="images/sysad.jpg" alt="System Administrator">
-        <div class="description">
-          <h2>System Administrator</h2>
-          <p>BFAR RO2 <br><br> 2013 to present</p>
-        </div>
-      </div>
-      <div class="work">
-        <img src="images/java-instructor.jpg" alt="Java Instructor">
-        <div class="description">
-          <h2>Partime Instructor</h2>
-          <p>
-            Java - Object Oriented Programming<br>
-            and Desktop Application Development<br><br>
-            Cagayan State University - Aparri <br>
-            2020-2021
           </p>
         </div>
       </div>
-      <div class="work">
-        <img src="images/repair.jpg" alt="Computer Hardware Servicing">
+      <div class="project">
+        <img src="./images/petly.jpg" alt="Petly">
         <div class="description">
-          <h2>Insrtructor</h2>
+          <a href="https://github.com/rjandres-sky/petly-app" target="_blank"><h2>Petly</h2></a>
           <p>
-            Computer Hardware Servicing <br>
-            CENCES College, Inc. <br><br>
-            2011-2012
+            Petly - a full stack MERN social media app specifically for pet owners for them to post all about their
+            pets. Made using MongoDB, ReactJS, NodeJS, Express API, HTML5 and CSS3
+            <br />
+            This project was done in collaboration with Ms. Roz Dalope and Mr. RJ Andres
           </p>
         </div>
       </div>
@@ -199,16 +187,19 @@
       <div class="link-icons">
         <a href="https://www.facebook.com/rjsandres94" target="_blank"><i class="fab fa-facebook"></i></a>
         <a href="https://github.com/rjandres-sky" target="_blank"><i class="fa-brands fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/rj-andres-163739254/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/rj-andres-163739254/" target="_blank"><i
+            class="fa-brands fa-linkedin"></i></a>
       </div>
+      <p> <a href="./RJ_ANDRES_Jobs_FullStackDev_MERN_2022.pdf" target="_blank" > Download My Resume</a> </p>
     </div>
 
     <div class="contact-right">
-      <form action="submit">
+      <form action=”mailto:rjandres.sky@gmail.com” method=”POST” enctype=”text/plain” name=”EmailForm”>
+
         <input type="text" name="Name" placeholder="Enter your name">
         <input type="email" name="email" placeholder="Enter your email">
         <textarea name="Message" id="message" rows="6" placeholder="Enter your message"></textarea>
-        <input type="submit" class="btn" name="submit" value="Submit">
+        <input type="submit" class="btn" name="submit" value="Send">
       </form>
     </div>
   </section>
