@@ -185,9 +185,9 @@ nav ul li a:hover::after {
   color: #cf340e;
 }
 
-.about-col-1:hover img {
+/* .about-col-1:hover img {
   transform: scale(1.2);
-}
+} */
 
 .about-col-2 {
   position: relative;
