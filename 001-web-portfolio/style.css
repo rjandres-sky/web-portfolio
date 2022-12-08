@@ -220,8 +220,13 @@ nav ul li a:hover::after{
 .skills{
   width: 80%;
   padding: 80px 20px;
+  justify-content: center;
+  align-content: center;
+  
 }
-
+.skill-content {
+  align-self: center;
+}
 .skill-content h1{
   font-size: 60px;
   font-weight: 600;
@@ -329,16 +334,21 @@ nav ul li a:hover::after{
   text-align: center;
   transition: height 0.5s;
   cursor: pointer;
+  
 }
 
 .description h2{
   font-weight: 600;
   font-size: 20px;
   margin: 20px;
+  padding-top: 30px;
 }
 .description p{
   font-family: 'Fira Sans', sans-serif;
-  font-size: 15px;
+  font-size: 13px;
+  padding-left:  20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 .project:hover img{
   transform: scale(1.1);
@@ -423,8 +433,10 @@ nav ul li a:hover::after{
 
 .contact{
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 100%;
-  padding: 80px 20px 0 50px;
+  padding: 10px 20px 50px 50px;
   align-items: flex-start;
 }
 
@@ -437,11 +449,12 @@ nav ul li a:hover::after{
 .contact-left{
   flex-basis: 35%;
   color: #fff;
-
+margin-left : 300px;
 }
 
 .contact-right{
   flex-basis: 60%;
+  margin-right: 300px;
 }
 
 .contact-left p{
