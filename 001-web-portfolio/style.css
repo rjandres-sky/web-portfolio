@@ -347,14 +347,15 @@ nav ul li a:hover::after {
 
 .description h2 {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 25px;
   margin: 20px;
   padding-top: 30px;
 }
 
 .description p {
   font-family: 'Fira Sans', sans-serif;
-  font-size: 13px;
+  font-size: 20px;
+  line-height: 1.5;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
