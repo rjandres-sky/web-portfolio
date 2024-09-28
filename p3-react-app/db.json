@@ -1,0 +1,451 @@
+{
+  "documents": [
+    {
+      "refid": "PR-121212",
+      "documentType": "PR",
+      "docno": "2022-01-0002",
+      "date": "2022-10-22",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "to be used by admin staff",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 3,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 2
+    },
+    {
+      "refid": "PR-121214",
+      "documentType": "PR",
+      "docno": "2022-01-0004",
+      "date": "2022-10-22",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "fdsfdsf sdfsdf gfh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [
+        {
+          "id": 0,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "ghgh",
+            "itemdesc": "hghgh"
+          },
+          "qty": 1,
+          "unitcost": "100.00",
+          "totalcost": "100.00"
+        },
+        {
+          "id": 1,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "aasas dfdf",
+            "itemdesc": "dfdf dff"
+          },
+          "qty": 1,
+          "unitcost": "30.00",
+          "totalcost": "30.00"
+        },
+        {
+          "id": 2,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "h",
+            "itemdesc": "h"
+          },
+          "qty": "5",
+          "unitcost": "45.00",
+          "totalcost": "225.00"
+        },
+        {
+          "id": 3,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "ggg",
+            "itemdesc": "dfdfd"
+          },
+          "qty": 1,
+          "unitcost": "67.00",
+          "totalcost": "67.00"
+        }
+      ],
+      "total": "422.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 1,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 3
+    },
+    {
+      "refid": "PR-2022110001",
+      "documentType": "PR",
+      "docno": "2022-11-0001",
+      "date": "1/11/2022",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 1,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 4
+    },
+    {
+      "refid": "PR-2022110002",
+      "documentType": "PR",
+      "docno": "2022-11-0002",
+      "date": "1/11/2022",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": "",
+        "name": "",
+        "position": "",
+        "section": ""
+      },
+      "id": 5
+    },
+    {
+      "refid": "DV-2022110001",
+      "documentType": "DV",
+      "docno": "2022-11-0001",
+      "date": "1/11/2022",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "particulars": "xcxzccxcvxv",
+      "amount": "0.00",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 2,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 6
+    },
+    {
+      "refid": "PR-2022110003",
+      "documentType": "PR",
+      "docno": "2022-11-0003",
+      "date": "2/11/2022",
+      "officeDivision": 1,
+      "officeSection": 1,
+      "responsibleCenterCode": "",
+      "purpose": "dfkdskjfdjskl kjkldfjlks ",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 2,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 7
+    },
+    {
+      "refid": "PR-2022110004",
+      "documentType": "PR",
+      "docno": "2022-11-0004",
+      "date": "2/11/2022",
+      "officeDivision": 1,
+      "officeSection": 1,
+      "responsibleCenterCode": "",
+      "purpose": "hhhhhhhhhhhhhh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 1,
+        "date": "02-11-2022 08:37:23"
+      },
+      "id": 8
+    },
+    {
+      "refid": "PR-2022110005",
+      "documentType": "PR",
+      "docno": "2022-11-0005",
+      "date": "2/11/2022",
+      "officeDivision": "1",
+      "officeSection": "1",
+      "responsibleCenterCode": "",
+      "purpose": "hhhhhhhhhhhhhh",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 1,
+        "date": "02-11-2022 08:41:53"
+      },
+      "id": 9
+    },
+    {
+      "refid": "PR-2022110006",
+      "documentType": "PR",
+      "docno": "2022-11-0006",
+      "date": "3/11/2022",
+      "officeDivision": 1,
+      "officeSection": 2,
+      "responsibleCenterCode": "",
+      "purpose": "for mis used",
+      "requestedBy": {
+        "name": "",
+        "position": ""
+      },
+      "recommending": {
+        "name": "",
+        "position": ""
+      },
+      "approvedBy": {
+        "name": "",
+        "position": ""
+      },
+      "items": [
+        {
+          "id": 0,
+          "stock": "",
+          "unit": "pc",
+          "description": {
+            "name": "Ink",
+            "itemdesc": "black"
+          },
+          "qty": 1,
+          "unitcost": "24.00",
+          "totalcost": "24.00"
+        }
+      ],
+      "total": "0.00",
+      "Status": "Pending",
+      "createdBy": {
+        "userid": 3,
+        "date": "03-11-2022 01:33:57"
+      },
+      "id": 10
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Angel Encarnacion",
+      "username": "encarnacion",
+      "password": "abc123",
+      "division": [
+        1,
+        1
+      ],
+      "roletype": "Director",
+      "cansign": "true",
+      "signingscope": "All"
+    },
+    {
+      "id": 2,
+      "name": "Jr Andres",
+      "username": "jrandres",
+      "password": "abc123",
+      "division": [
+        2,
+        5
+      ],
+      "roletype": "User",
+      "cansign": "false",
+      "signingscope": ""
+    },
+    {
+      "id": 3,
+      "name": "Rj Andres",
+      "username": "rjandres",
+      "division": [
+        1,
+        2
+      ],
+      "password": "abc123",
+      "roletype": "Administrator",
+      "cansign": "false",
+      "signingscope": ""
+    }
+  ],
+  "sections": [
+    {
+      "id": 1,
+      "division": 1,
+      "section": "ORD",
+      "description": "Office of the Regional Director"
+    },
+    {
+      "id": 2,
+      "division": 1,
+      "section": "MIS",
+      "description": "Management Information Section"
+    },
+    {
+      "id": 8,
+      "division": 1,
+      "section": "FIS",
+      "description": "Fisheries Information Section"
+    },
+    {
+      "id": 3,
+      "division": 2,
+      "section": "HRS",
+      "description": "Human Resources Section"
+    },
+    {
+      "id": 4,
+      "division": 2,
+      "section": "SPU",
+      "description": "Supply and Property Unit"
+    },
+    {
+      "id": 5,
+      "division": 2,
+      "section": "Budget",
+      "description": "Budget Unit"
+    },
+    {
+      "id": 6,
+      "division": 2,
+      "section": "Cashier",
+      "description": "Cashier Unit"
+    },
+    {
+      "id": 7,
+      "division": 2,
+      "section": "Accounting",
+      "description": "Accounting Unit"
+    }
+  ],
+  "divisions": [
+    {
+      "id": 1,
+      "division": "ORD",
+      "description": "Office of the Regional Director"
+    },
+    {
+      "id": 2,
+      "division": "Admin and Finance",
+      "description": "Administrative and Finance Division"
+    }
+  ],
+  "documentstatus": [
+    {
+      "docno": "PR-2022110006",
+      "action": "Forwarded",
+      "remarks": "for reccomending approval",
+      "dateandtime": "03-11-2022 01:53:16",
+      "userid": 3,
+      "forwardedto": {
+        "division": 2,
+        "section": 5,
+        "empid": 2
+      },
+      "readStatus": false,
+      "id": 1
+    }
+  ]
+}

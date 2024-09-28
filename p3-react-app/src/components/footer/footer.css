@@ -1,0 +1,15 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px 0 40px;
+    background: linear-gradient(180deg,#00caff 0%, #007eff 80%);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.10);
+}
+
+nav h1, .user-welcome {
+    color: #fff;
+    margin : 10px;
+}
